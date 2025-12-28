@@ -1,22 +1,44 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { AdSenseScript } from "@/components/AdSense";
+import { ANALYTICS_CONFIG } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "PuzzlyNest - Free Brain Games for Kids & Seniors",
   description: "Play 100+ free online games at PuzzlyNest! Brain training puzzles for seniors and safe, fun educational games for kids. No download required!",
   keywords: "free games, brain games, kids games, senior games, online games, puzzle games, memory games, sudoku, solitaire, puzzlynest",
   authors: [{ name: "PuzzlyNest" }],
+  metadataBase: new URL('https://puzzlynest.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: "PuzzlyNest - Your Cozy Corner for Brain Games",
     description: "Free brain training games for seniors and safe, educational games for kids. 100+ games to play now!",
     type: "website",
     siteName: "PuzzlyNest",
     url: "https://puzzlynest.com",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "PuzzlyNest - Free Brain Games",
     description: "100+ free games for kids and seniors. Play now!",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: ANALYTICS_CONFIG.SEARCH_CONSOLE_VERIFICATION || undefined,
   },
 };
 
@@ -30,9 +52,20 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#6366f1" />
       </head>
       <body>
+        {/* Google Analytics */}
+        <GoogleAnalytics />
+
+        {/* Google AdSense Script */}
+        <AdSenseScript />
+
         {/* Animated Background */}
         <div className="bg-orbs">
           <div className="bg-orb bg-orb-1"></div>
