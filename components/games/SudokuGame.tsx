@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import type { Game } from '@/lib/games';
 
-// Simple Sudoku puzzle (0 = empty cell)
-const EASY_PUZZLE = [
+// --- DATA ---
+
+const PUZZLE_9x9 = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
     [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -16,7 +18,7 @@ const EASY_PUZZLE = [
     [0, 0, 0, 0, 8, 0, 0, 7, 9],
 ];
 
-const SOLUTION = [
+const SOLUTION_9x9 = [
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -28,26 +30,53 @@ const SOLUTION = [
     [3, 4, 5, 2, 8, 6, 1, 7, 9],
 ];
 
-export default function SudokuGame() {
-    const [grid, setGrid] = useState<number[][]>(() =>
-        EASY_PUZZLE.map(row => [...row])
-    );
+const PUZZLE_6x6 = [
+    [0, 0, 3, 0, 1, 0],
+    [5, 6, 0, 3, 2, 0],
+    [0, 5, 4, 2, 0, 3],
+    [2, 0, 6, 4, 5, 0],
+    [0, 1, 2, 0, 4, 5],
+    [0, 4, 0, 1, 0, 0],
+];
+const SOLUTION_6x6 = [
+    [4, 2, 3, 5, 1, 6],
+    [5, 6, 1, 3, 2, 4],
+    [1, 5, 4, 2, 6, 3],
+    [2, 3, 6, 4, 5, 1],
+    [3, 1, 2, 6, 4, 5],
+    [6, 4, 5, 1, 3, 2],
+];
+
+export default function SudokuGame({ game }: { game?: Game }) {
+    const isMini = game?.id === 'sudoku-mini';
+    const gridSize = isMini ? 6 : 9;
+    const initialPuzzle = isMini ? PUZZLE_6x6 : PUZZLE_9x9;
+    const solution = isMini ? SOLUTION_6x6 : SOLUTION_9x9;
+    const boxRows = isMini ? 2 : 3;
+    const boxCols = isMini ? 3 : 3;
+
+    const [grid, setGrid] = useState<number[][]>(() => initialPuzzle.map(row => [...row]));
     const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
     const [errors, setErrors] = useState<Set<string>>(new Set());
     const [isComplete, setIsComplete] = useState(false);
 
-    const isFixed = (row: number, col: number) => EASY_PUZZLE[row][col] !== 0;
+    // Reset when game mode changes
+    useEffect(() => {
+        resetGame();
+    }, [isMini]);
+
+    const isFixed = (row: number, col: number) => initialPuzzle[row][col] !== 0;
 
     const checkComplete = useCallback((newGrid: number[][]) => {
-        for (let r = 0; r < 9; r++) {
-            for (let c = 0; c < 9; c++) {
-                if (newGrid[r][c] !== SOLUTION[r][c]) {
+        for (let r = 0; r < gridSize; r++) {
+            for (let c = 0; c < gridSize; c++) {
+                if (newGrid[r][c] !== solution[r][c]) {
                     return false;
                 }
             }
         }
         return true;
-    }, []);
+    }, [gridSize, solution]);
 
     const handleCellClick = (row: number, col: number) => {
         if (!isFixed(row, col)) {
@@ -67,7 +96,7 @@ export default function SudokuGame() {
 
         // Check for errors
         const newErrors = new Set<string>();
-        if (num !== 0 && num !== SOLUTION[row][col]) {
+        if (num !== 0 && num !== solution[row][col]) {
             newErrors.add(`${row}-${col}`);
         }
         setErrors(newErrors);
@@ -79,7 +108,7 @@ export default function SudokuGame() {
     };
 
     const resetGame = () => {
-        setGrid(EASY_PUZZLE.map(row => [...row]));
+        setGrid(initialPuzzle.map(row => [...row]));
         setSelectedCell(null);
         setErrors(new Set());
         setIsComplete(false);
@@ -92,15 +121,15 @@ export default function SudokuGame() {
                     <Link href="/" style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>
                         ← Back
                     </Link>
-                    <h1 className="game-title">Sudoku</h1>
+                    <h1 className="game-title">{isMini ? 'Mini Sudoku' : 'Sudoku Classic'}</h1>
                     <span style={{
                         padding: '0.5rem 1rem',
-                        background: 'rgba(245, 158, 11, 0.2)',
+                        background: isMini ? 'rgba(99, 102, 241, 0.2)' : 'rgba(245, 158, 11, 0.2)',
                         borderRadius: '100px',
-                        color: '#fbbf24',
+                        color: isMini ? '#818cf8' : '#fbbf24',
                         fontSize: '0.9rem',
                     }}>
-                        Easy
+                        {isMini ? '6x6' : 'Easy 9x9'}
                     </span>
                 </div>
 
@@ -117,7 +146,13 @@ export default function SudokuGame() {
                     </div>
                 ) : (
                     <>
-                        <div className="sudoku-grid">
+                        <div
+                            className="sudoku-grid"
+                            style={{
+                                gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+                                maxWidth: isMini ? '400px' : '500px'
+                            }}
+                        >
                             {grid.map((row, rowIndex) =>
                                 row.map((cell, colIndex) => (
                                     <button
@@ -130,8 +165,9 @@ export default function SudokuGame() {
                                         onClick={() => handleCellClick(rowIndex, colIndex)}
                                         style={{
                                             color: errors.has(`${rowIndex}-${colIndex}`) ? '#ef4444' : undefined,
-                                            borderRight: (colIndex + 1) % 3 === 0 && colIndex < 8 ? '2px solid rgba(255,255,255,0.3)' : undefined,
-                                            borderBottom: (rowIndex + 1) % 3 === 0 && rowIndex < 8 ? '2px solid rgba(255,255,255,0.3)' : undefined,
+                                            // Grid Lines
+                                            borderRight: (colIndex + 1) % boxCols === 0 && colIndex < gridSize - 1 ? '3px solid rgba(255,255,255,0.5)' : undefined,
+                                            borderBottom: (rowIndex + 1) % boxRows === 0 && rowIndex < gridSize - 1 ? '3px solid rgba(255,255,255,0.5)' : undefined,
                                         }}
                                     >
                                         {cell !== 0 ? cell : ''}
@@ -141,7 +177,7 @@ export default function SudokuGame() {
                         </div>
 
                         <div className="number-pad">
-                            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
+                            {Array.from({ length: gridSize }, (_, i) => i + 1).map(num => (
                                 <button
                                     key={num}
                                     className="number-btn"

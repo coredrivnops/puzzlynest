@@ -14,6 +14,8 @@ const MinesweeperGame = dynamic(() => import('@/components/games/MinesweeperGame
 const NumberSequenceGame = dynamic(() => import('@/components/games/NumberSequenceGame'), { ssr: false });
 const SimonSaysGame = dynamic(() => import('@/components/games/SimonSaysGame'), { ssr: false });
 const PatternGame = dynamic(() => import('@/components/games/PatternGame'), { ssr: false });
+const NonogramGame = dynamic(() => import('@/components/games/NonogramGame'), { ssr: false });
+const NumberBondsGame = dynamic(() => import('@/components/games/NumberBondsGame'), { ssr: false });
 
 // Classic Games
 const SolitaireGame = dynamic(() => import('@/components/games/SolitaireGame'), { ssr: false });
@@ -21,6 +23,7 @@ const ConnectFourGame = dynamic(() => import('@/components/games/ConnectFourGame
 const TangramGame = dynamic(() => import('@/components/games/TangramGame'), { ssr: false });
 const CheckersGame = dynamic(() => import('@/components/games/CheckersGame'), { ssr: false });
 const JigsawGame = dynamic(() => import('@/components/games/JigsawGame'), { ssr: false });
+const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ssr: false });
 
 // Word Games
 const WordSearchGame = dynamic(() => import('@/components/games/WordSearchGame'), { ssr: false });
@@ -42,7 +45,7 @@ const ColorLearningGame = dynamic(() => import('@/components/games/ColorLearning
 const ColoringBookGame = dynamic(() => import('@/components/games/ColoringBookGame'), { ssr: false });
 
 // Map game IDs to their authentic implementations
-const gameComponents: Record<string, React.ComponentType> = {
+const gameComponents: Record<string, React.ComponentType<any>> = {
     // Brain Training & Logic
     'memory-match': MemoryMatchGame,
     'animal-memory': MemoryMatchGame,
@@ -56,6 +59,8 @@ const gameComponents: Record<string, React.ComponentType> = {
     'pattern-master': PatternGame,
     'pattern-completion': PatternGame,
     'spatial-reasoning': PatternGame,
+    'nonogram': NonogramGame,
+    'number-bonds': NumberBondsGame,
 
     // Classic Games
     'solitaire-klondike': SolitaireGame,
@@ -68,6 +73,7 @@ const gameComponents: Record<string, React.ComponentType> = {
     'jigsaw-easy': JigsawGame,
     'jigsaw-medium': JigsawGame,
     'jigsaw-hard': JigsawGame,
+    'reversi': ReversiGame,
 
     // Word Games  
     'word-search': WordSearchGame,
@@ -106,7 +112,7 @@ export default function GamePlayer({ game }: GamePlayerProps) {
     const GameComponent = gameComponents[game.id];
 
     if (GameComponent) {
-        return <GameComponent />;
+        return <GameComponent game={game} />;
     }
 
     // For games not yet implemented, show a "Coming Soon" with game info
