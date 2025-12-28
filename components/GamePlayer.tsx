@@ -20,6 +20,8 @@ const NumberBondsGame = dynamic(() => import('@/components/games/NumberBondsGame
 // Classic Games
 const SolitaireGame = dynamic(() => import('@/components/games/SolitaireGame'), { ssr: false });
 const SpiderSolitaireGame = dynamic(() => import('@/components/games/SpiderSolitaireGame'), { ssr: false });
+const FreeCellGame = dynamic(() => import('@/components/games/FreeCellGame'), { ssr: false });
+const PyramidSolitaireGame = dynamic(() => import('@/components/games/PyramidSolitaireGame'), { ssr: false });
 const ConnectFourGame = dynamic(() => import('@/components/games/ConnectFourGame'), { ssr: false });
 const TangramGame = dynamic(() => import('@/components/games/TangramGame'), { ssr: false });
 const CheckersGame = dynamic(() => import('@/components/games/CheckersGame'), { ssr: false });
@@ -43,8 +45,8 @@ const FruitCatcherGame = dynamic(() => import('@/components/games/FruitCatcherGa
 
 // Kids Learning & Creative
 const CountingGame = dynamic(() => import('@/components/games/CountingGame'), { ssr: false });
-const ColorLearningGame = dynamic(() => import('@/components/games/ColorLearningGame'), { ssr: false });
-const ColoringBookGame = dynamic(() => import('@/components/games/ColoringBookGame'), { ssr: false });
+const QuizGame = dynamic(() => import('@/components/games/QuizGame'), { ssr: false });
+const DrawingGame = dynamic(() => import('@/components/games/DrawingGame'), { ssr: false });
 const ClockGame = dynamic(() => import('@/components/games/ClockGame'), { ssr: false });
 const MathAdventureGame = dynamic(() => import('@/components/games/MathAdventureGame'), { ssr: false });
 
@@ -70,8 +72,8 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     // Classic Games
     'solitaire-klondike': SolitaireGame,
     'solitaire-spider': SpiderSolitaireGame,
-    'solitaire-freecell': SolitaireGame,     // Placeholder usage
-    'pyramid-solitaire': SolitaireGame,      // Placeholder usage
+    'solitaire-freecell': FreeCellGame,
+    'pyramid-solitaire': PyramidSolitaireGame,
     'connect-four': ConnectFourGame,
     'tangram': TangramGame,
     'checkers': CheckersGame,
@@ -105,12 +107,32 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
 
     // Kids Learning
     'counting-fun': CountingGame,
-    'color-learning': ColorLearningGame,
-    'coloring-book': ColoringBookGame,
-    'coloring-mandala': ColoringBookGame,
+    'color-learning': QuizGame,
+    'shape-matching': QuizGame,
+    'money-counting': QuizGame,
+    'rhyming-words': QuizGame,
+    'sight-words': QuizGame,
+    'phonics-sounds': QuizGame,
+    'animal-sounds': QuizGame,
+    'seasons-weather': QuizGame,
+    'body-parts': QuizGame,
+    'vocabulary-builder': QuizGame,
     'basic-math-addition': MathAdventureGame,
     'basic-math-subtraction': MathAdventureGame,
     'clock-reading': ClockGame,
+
+    // Creative
+    'coloring-book': DrawingGame,
+    'coloring-mandala': DrawingGame, // Simplified
+    'drawing-pad': DrawingGame,
+    'sticker-scene': DrawingGame,
+    'pixel-art': DrawingGame,
+    'stamp-art': DrawingGame,
+    'pattern-designer': DrawingGame,
+    'dress-up': DrawingGame, // Fallback to drawing
+    'room-decorator': DrawingGame, // Fallback
+    'cake-decorator': DrawingGame, // Fallback
+    'pet-salon': DrawingGame, // Fallback
 };
 
 interface GamePlayerProps {
