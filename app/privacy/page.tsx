@@ -1,59 +1,68 @@
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import React from 'react';
+import { Metadata } from 'next';
 
-export const metadata = {
-    title: 'Privacy Policy - PlayZen',
-    description: 'PlayZen privacy policy - how we handle your data and protect your privacy.',
+export const metadata: Metadata = {
+    title: 'Privacy Policy - PuzzlyNest',
+    description: 'Privacy Policy for PuzzlyNest. Learn how we protect your data and ensure a safe gaming environment for kids and seniors.',
 };
 
-export default function PrivacyPage() {
+export default function PrivacyPolicy() {
     return (
-        <>
-            <Navigation />
+        <div className="min-h-screen bg-slate-900 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto bg-slate-800 rounded-2xl shadow-xl p-8 border border-slate-700">
+                <h1 className="text-3xl font-bold mb-8 text-indigo-400">Privacy Policy</h1>
 
-            <main className="container" style={{ paddingTop: '2rem', maxWidth: '800px' }}>
-                <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>Privacy Policy</h1>
+                <div className="space-y-6 text-slate-300">
+                    <p className="text-sm text-slate-400">Last Updated: {new Date().toLocaleDateString()}</p>
 
-                <div className="card" style={{ padding: '2rem' }}>
-                    <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem' }}>
-                        Last updated: {new Date().toLocaleDateString()}
-                    </p>
+                    <section>
+                        <h2 className="text-xl font-semibold mb-3 text-white">1. Introduction</h2>
+                        <p>Welcome to PuzzlyNest. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+                    </section>
 
-                    <h2 style={{ marginBottom: '1rem' }}>Information We Collect</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', lineHeight: 1.8 }}>
-                        PlayZen does not require registration or collect personal information.
-                        We may collect anonymous usage data to improve our games.
-                    </p>
+                    <section>
+                        <h2 className="text-xl font-semibold mb-3 text-white">2. Children's Privacy (COPPA Compliance)</h2>
+                        <p>PuzzlyNest offers games suitable for children. We are committed to complying with the Children's Online Privacy Protection Act (COPPA). We do not knowingly collect personal information from children under the age of 13. If you are a parent or guardian and believe we have collected information from your child, please contact us immediately.</p>
+                        <p className="mt-2">For our "Kids" section, we ensure that any advertisements served are tagged as "child-directed" to prevent behavioral targeting.</p>
+                    </section>
 
-                    <h2 style={{ marginBottom: '1rem' }}>Cookies</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', lineHeight: 1.8 }}>
-                        We use essential cookies to remember your game preferences.
-                        Third-party advertising partners may use cookies for ad personalization.
-                    </p>
+                    <section>
+                        <h2 className="text-xl font-semibold mb-3 text-white">3. Information We Collect</h2>
+                        <p>We collect and process the following data:</p>
+                        <ul className="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong>Usage Data:</strong> Information about how you use our website, games, and services.</li>
+                            <li><strong>Technical Data:</strong> Internet protocol (IP) address, browser type and version, time zone setting and location, browser plug-in types and versions, operating system and platform.</li>
+                            <li><strong>Cookies:</strong> We use cookies to improve your experience and analyze traffic.</li>
+                        </ul>
+                    </section>
 
-                    <h2 style={{ marginBottom: '1rem' }}>Advertising</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', lineHeight: 1.8 }}>
-                        We use Google AdSense to display advertisements. Google may use cookies
-                        to serve ads based on your prior visits. You can opt out of personalized
-                        advertising at Google&apos;s Ads Settings.
-                    </p>
+                    <section>
+                        <h2 className="text-xl font-semibold mb-3 text-white">4. How We Use Information</h2>
+                        <p>We use your data to:</p>
+                        <ul className="list-disc pl-5 mt-2 space-y-1">
+                            <li>Provide and improve our games and services.</li>
+                            <li>Analyze usage trends to enhance user experience.</li>
+                            <li>Serve non-personalized advertisements (where applicable).</li>
+                            <li>Maintain the security of our platform.</li>
+                        </ul>
+                    </section>
 
-                    <h2 style={{ marginBottom: '1rem' }}>Children&apos;s Privacy (COPPA)</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', lineHeight: 1.8 }}>
-                        For games designed for children under 13, we comply with COPPA.
-                        We do not collect personal information from children, and ads shown
-                        in the kids section are not personalized.
-                    </p>
+                    <section>
+                        <h2 className="text-xl font-semibold mb-3 text-white">5. Third-Party Services</h2>
+                        <p>We use trusted third-party services that may collect data:</p>
+                        <ul className="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong>Google Analytics:</strong> To analyze website traffic and user behavior.</li>
+                            <li><strong>Google AdSense:</strong> To serve advertisements.</li>
+                        </ul>
+                    </section>
 
-                    <h2 style={{ marginBottom: '1rem' }}>Contact</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}>
-                        If you have questions about this Privacy Policy, please contact us
-                        at privacy@playzen.io.
-                    </p>
+                    <section>
+                        <h2 className="text-xl font-semibold mb-3 text-white">6. Contact Us</h2>
+                        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+                        <p className="mt-2">Email: privacy@puzzlynest.com</p>
+                    </section>
                 </div>
-            </main>
-
-            <Footer />
-        </>
+            </div>
+        </div>
     );
 }
