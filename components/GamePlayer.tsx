@@ -19,6 +19,7 @@ const NumberBondsGame = dynamic(() => import('@/components/games/NumberBondsGame
 
 // Classic Games
 const SolitaireGame = dynamic(() => import('@/components/games/SolitaireGame'), { ssr: false });
+const SpiderSolitaireGame = dynamic(() => import('@/components/games/SpiderSolitaireGame'), { ssr: false });
 const ConnectFourGame = dynamic(() => import('@/components/games/ConnectFourGame'), { ssr: false });
 const TangramGame = dynamic(() => import('@/components/games/TangramGame'), { ssr: false });
 const CheckersGame = dynamic(() => import('@/components/games/CheckersGame'), { ssr: false });
@@ -27,6 +28,7 @@ const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ss
 
 // Word Games
 const WordSearchGame = dynamic(() => import('@/components/games/WordSearchGame'), { ssr: false });
+const AnagramChallengeGame = dynamic(() => import('@/components/games/AnagramChallengeGame'), { ssr: false });
 const HangmanGame = dynamic(() => import('@/components/games/HangmanGame'), { ssr: false });
 const SpellingBeeGame = dynamic(() => import('@/components/games/SpellingBeeGame'), { ssr: false });
 const WordLadderGame = dynamic(() => import('@/components/games/WordLadderGame'), { ssr: false });
@@ -43,6 +45,8 @@ const FruitCatcherGame = dynamic(() => import('@/components/games/FruitCatcherGa
 const CountingGame = dynamic(() => import('@/components/games/CountingGame'), { ssr: false });
 const ColorLearningGame = dynamic(() => import('@/components/games/ColorLearningGame'), { ssr: false });
 const ColoringBookGame = dynamic(() => import('@/components/games/ColoringBookGame'), { ssr: false });
+const ClockGame = dynamic(() => import('@/components/games/ClockGame'), { ssr: false });
+const MathAdventureGame = dynamic(() => import('@/components/games/MathAdventureGame'), { ssr: false });
 
 // Map game IDs to their authentic implementations
 const gameComponents: Record<string, React.ComponentType<any>> = {
@@ -61,12 +65,13 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'spatial-reasoning': PatternGame,
     'nonogram': NonogramGame,
     'number-bonds': NumberBondsGame,
+    'mental-math': NumberBondsGame,
 
     // Classic Games
     'solitaire-klondike': SolitaireGame,
-    'solitaire-spider': SolitaireGame,
-    'solitaire-freecell': SolitaireGame,
-    'pyramid-solitaire': SolitaireGame,
+    'solitaire-spider': SpiderSolitaireGame,
+    'solitaire-freecell': SolitaireGame,     // Placeholder usage
+    'pyramid-solitaire': SolitaireGame,      // Placeholder usage
     'connect-four': ConnectFourGame,
     'tangram': TangramGame,
     'checkers': CheckersGame,
@@ -75,32 +80,37 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'jigsaw-hard': JigsawGame,
     'reversi': ReversiGame,
 
-    // Word Games  
+    // Word Games
     'word-search': WordSearchGame,
+    'anagram-challenge': AnagramChallengeGame,
+    'boggle': WordSearchGame,               // Placeholder as WordSearch
     'hangman': HangmanGame,
     'spelling-bee': SpellingBeeGame,
     'word-ladder': WordLadderGame,
-    'anagram-challenge': WordSearchGame,
-    'boggle': WordSearchGame,
 
     // Action & Arcade
     'bubble-pop': BubblePopGame,
     'whack-a-mole': WhackAMoleGame,
     'tap-the-mole': WhackAMoleGame,
     'balloon-pop': BalloonPopGame,
+    'flappy-game': FlappyGame,
     'flying-game': FlappyGame,
-    'break-the-bricks': BrickBreakerGame,
-    'catch-the-fruit': FruitCatcherGame,
-    'fruit-catcher': FruitCatcherGame,
-    'candy-collect': FruitCatcherGame,
     'endless-runner': FlappyGame,
     'jump-adventure': FlappyGame,
+    'brick-breaker': BrickBreakerGame,
+    'break-the-bricks': BrickBreakerGame,
+    'fruit-catcher': FruitCatcherGame,
+    'catch-the-fruit': FruitCatcherGame,
+    'candy-collect': FruitCatcherGame,
 
-    // Kids Learning & Creative
+    // Kids Learning
     'counting-fun': CountingGame,
     'color-learning': ColorLearningGame,
     'coloring-book': ColoringBookGame,
     'coloring-mandala': ColoringBookGame,
+    'basic-math-addition': MathAdventureGame,
+    'basic-math-subtraction': MathAdventureGame,
+    'clock-reading': ClockGame,
 };
 
 interface GamePlayerProps {
@@ -149,4 +159,3 @@ export default function GamePlayer({ game }: GamePlayerProps) {
         </div>
     );
 }
-

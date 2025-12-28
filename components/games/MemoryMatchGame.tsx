@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import type { Game } from '@/lib/games';
 
 interface MemoryCard {
     id: number;
@@ -10,9 +11,22 @@ interface MemoryCard {
     isMatched: boolean;
 }
 
-const EMOJIS = ['🌟', '🎈', '🌈', '🦋', '🌸', '🍎', '🚀', '🎨'];
+const THEMES: Record<string, string[]> = {
+    'default': ['🌟', '🎈', '🌈', '🦋', '🌸', '🍎', '🚀', '🎨'],
+    'animal-memory': ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯'],
+    'memory-cards-advanced': ['🍇', '🍈', '🍉', '🍊', '🍋', '🍌', '🍍', '🍎', '🍏', '🍐', '🍑', '🍒', '🍓', '🥝', '🍅', '🥥', '🥑', '🍆'] // 18 pairs = 36 cards (6x6)
+};
 
-export default function MemoryMatchGame() {
+export default function MemoryMatchGame({ game }: { game?: Game }) {
+    const isAdvanced = game?.id === 'memory-cards-advanced';
+    const isAnimal = game?.id === 'animal-memory';
+
+    // Determine Deck Config
+    const themeKey = isAnimal ? 'animal-memory' : (isAdvanced ? 'memory-cards-advanced' : 'default');
+    const sourceEmojis = THEMES[themeKey];
+    const pairCount = isAdvanced ? 18 : 8; // 6x6 or 4x4
+    const gridCols = isAdvanced ? 6 : 4;
+
     const [cards, setCards] = useState<MemoryCard[]>([]);
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
@@ -21,7 +35,10 @@ export default function MemoryMatchGame() {
     const [isChecking, setIsChecking] = useState(false);
 
     const initializeGame = useCallback(() => {
-        const shuffledCards = [...EMOJIS, ...EMOJIS]
+        // Safe slice if theme has fewer than required pairs? (Assuming data is sufficient)
+        const selectedEmojis = sourceEmojis.slice(0, pairCount);
+
+        const shuffledCards = [...selectedEmojis, ...selectedEmojis]
             .sort(() => Math.random() - 0.5)
             .map((emoji, index) => ({
                 id: index,
@@ -34,7 +51,8 @@ export default function MemoryMatchGame() {
         setMoves(0);
         setMatches(0);
         setGameWon(false);
-    }, []);
+        setIsChecking(false);
+    }, [pairCount, sourceEmojis]);
 
     useEffect(() => {
         initializeGame();
@@ -68,7 +86,7 @@ export default function MemoryMatchGame() {
                     setFlippedCards([]);
                     setIsChecking(false);
 
-                    if (matches + 1 === EMOJIS.length) {
+                    if (matches + 1 === pairCount) {
                         setGameWon(true);
                     }
                 }, 500);
@@ -93,9 +111,9 @@ export default function MemoryMatchGame() {
                     <Link href="/" style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>
                         ← Back
                     </Link>
-                    <h1 className="game-title">Memory Match</h1>
+                    <h1 className="game-title">{game?.name || 'Memory Match'}</h1>
                     <div className="game-score">
-                        Moves: {moves} | Matches: {matches}/{EMOJIS.length}
+                        Moves: {moves} | Matches: {matches}/{pairCount}
                     </div>
                 </div>
 
@@ -114,17 +132,27 @@ export default function MemoryMatchGame() {
                     <>
                         <div
                             className="memory-grid"
-                            style={{ gridTemplateColumns: 'repeat(4, 1fr)', maxWidth: '400px', margin: '0 auto' }}
+                            style={{
+                                gridTemplateColumns: `repeat(${gridCols}, 1fr)`,
+                                maxWidth: isAdvanced ? '600px' : '400px',
+                                margin: '0 auto'
+                            }}
                         >
                             {cards.map(card => (
                                 <div
                                     key={card.id}
-                                    className={`memory-card ${card.isFlipped ? 'flipped' : ''} ${card.isMatched ? 'matched' : ''}`}
+                                    className={`
+                                        memory-card 
+                                        ${card.isFlipped ? 'flipped' : ''} 
+                                        ${card.isMatched ? 'matched' : ''}
+                                    `}
                                     onClick={() => handleCardClick(card.id)}
                                 >
                                     <div className="memory-card-inner">
                                         <div className="memory-card-back">❓</div>
-                                        <div className="memory-card-front">{card.emoji}</div>
+                                        <div className="memory-card-front" style={{ fontSize: isAdvanced ? '1.5rem' : '2.5rem' }}>
+                                            {card.emoji}
+                                        </div>
                                     </div>
                                 </div>
                             ))}
