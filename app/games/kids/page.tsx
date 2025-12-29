@@ -5,7 +5,7 @@ import AdBanner from '@/components/AdBanner';
 import { GAMES } from '@/lib/games';
 
 export const metadata = {
-    title: 'Kids Games - PlayZen | Safe Fun Games for Children',
+    title: 'Kids Games - PuzzlyNest | Safe Fun Games for Children',
     description: 'Safe, fun, and educational games for kids ages 4-12. Learn counting, letters, shapes, and more while playing! No download required.',
 };
 

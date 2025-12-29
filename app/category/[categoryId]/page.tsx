@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryI
     if (!category) return {};
 
     return {
-        title: `${category.name} Games - Play Free Online | PlayZen`,
+        title: `${category.name} Games - Play Free Online | PuzzlyNest`,
         description: `${category.description}. Browse our collection of free ${category.name.toLowerCase()} games, perfect for ${category.ageGroup === 'kids' ? 'children' : category.ageGroup === 'seniors' ? 'seniors' : 'all ages'}.`,
     };
 }

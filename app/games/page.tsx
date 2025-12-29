@@ -6,7 +6,7 @@ import { GAMES } from '@/lib/games';
 import Link from 'next/link';
 
 export const metadata = {
-    title: 'All Games - PlayZen | Free Online Games',
+    title: 'All Games - PuzzlyNest | Free Online Games',
     description: 'Browse our complete collection of 20+ free online games. Puzzle games, card games, brain training, and fun arcade games for all ages.',
 };
 

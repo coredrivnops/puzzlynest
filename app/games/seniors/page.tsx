@@ -5,7 +5,7 @@ import AdBanner from '@/components/AdBanner';
 import { GAMES } from '@/lib/games';
 
 export const metadata = {
-    title: 'Brain Training Games for Seniors - PlayZen',
+    title: 'Brain Training Games - PuzzlyNest',
     description: 'Free brain training games designed for adults 60+. Sudoku, crosswords, memory games, and puzzles with large fonts and easy controls.',
 };
 
