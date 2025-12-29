@@ -35,6 +35,8 @@ const BackgammonGame = dynamic(() => import('@/components/games/BackgammonGame')
 const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ssr: false });
 const MahjongGame = dynamic(() => import('@/components/games/MahjongGame'), { ssr: false });
 const MatchThreeGame = dynamic(() => import('@/components/games/MatchThreeGame'), { ssr: false });
+const HeartsGame = dynamic(() => import('@/components/games/HeartsGame'), { ssr: false });
+const MosaicPuzzlesGame = dynamic(() => import('@/components/games/MosaicPuzzlesGame'), { ssr: false });
 const CardGameStub = dynamic(() => import('@/components/games/CardGameStub'), { ssr: false });
 
 // Word Games
@@ -121,7 +123,7 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'mahjong-solitaire': MahjongGame,
     'tile-matching': MahjongGame,
     'match-three-zen': MatchThreeGame,
-    'hearts': CardGameStub,
+    'hearts': HeartsGame,
     'gin-rummy': CardGameStub,
     'cribbage': CardGameStub,
 
@@ -197,7 +199,7 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     // Visual/Observation
     'spot-difference': SpotDifferenceGame,
     'hidden-objects': HiddenObjectsGame,
-    'mosaic-puzzles': CardGameStub,
+    'mosaic-puzzles': MosaicPuzzlesGame,
     'dot-connect': DrawingGame,
 };
 
