@@ -11,6 +11,9 @@ import type { Game } from '@/lib/games';
 const MemoryMatchGame = dynamic(() => import('@/components/games/MemoryMatchGame'), { ssr: false });
 const SudokuGame = dynamic(() => import('@/components/games/SudokuGame'), { ssr: false });
 const MinesweeperGame = dynamic(() => import('@/components/games/MinesweeperGame'), { ssr: false });
+const LogicGridGame = dynamic(() => import('@/components/games/LogicGridGame'), { ssr: false });
+const KakuroGame = dynamic(() => import('@/components/games/KakuroGame'), { ssr: false });
+const CardGameStub = dynamic(() => import('@/components/games/CardGameStub'), { ssr: false });
 const NumberSequenceGame = dynamic(() => import('@/components/games/NumberSequenceGame'), { ssr: false });
 const SimonSaysGame = dynamic(() => import('@/components/games/SimonSaysGame'), { ssr: false });
 const PatternGame = dynamic(() => import('@/components/games/PatternGame'), { ssr: false });
@@ -30,6 +33,7 @@ const ChessPuzzlesGame = dynamic(() => import('@/components/games/ChessPuzzlesGa
 const DominoesGame = dynamic(() => import('@/components/games/DominoesGame'), { ssr: false });
 const BackgammonGame = dynamic(() => import('@/components/games/BackgammonGame'), { ssr: false });
 const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ssr: false });
+const MahjongGame = dynamic(() => import('@/components/games/MahjongGame'), { ssr: false });
 
 // Word Games
 const WordSearchGame = dynamic(() => import('@/components/games/WordSearchGame'), { ssr: false });
@@ -38,6 +42,8 @@ const HangmanGame = dynamic(() => import('@/components/games/HangmanGame'), { ss
 const SpellingBeeGame = dynamic(() => import('@/components/games/SpellingBeeGame'), { ssr: false });
 const WordLadderGame = dynamic(() => import('@/components/games/WordLadderGame'), { ssr: false });
 const CrosswordGame = dynamic(() => import('@/components/games/CrosswordGame'), { ssr: false });
+const CryptogramGame = dynamic(() => import('@/components/games/CryptogramGame'), { ssr: false });
+const WordAssociationGame = dynamic(() => import('@/components/games/WordAssociationGame'), { ssr: false });
 
 // Action & Arcade
 const BubblePopGame = dynamic(() => import('@/components/games/BubblePopGame'), { ssr: false });
@@ -69,6 +75,13 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'pattern-master': PatternGame,
     'pattern-completion': PatternGame,
     'spatial-reasoning': PatternGame,
+    'logic-grid': LogicGridGame,
+    'kakuro': KakuroGame,
+    'brain-teasers': LogicGridGame, // Placeholder
+    'spot-difference': CardGameStub,
+    'hidden-objects': CardGameStub,
+    'mosaic-puzzles': CardGameStub,
+    'dot-connect': DrawingGame, // Trace mode stub
     'nonogram': NonogramGame,
     'number-bonds': NumberBondsGame,
     'mental-math': NumberBondsGame,
@@ -88,6 +101,8 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'jigsaw-medium': JigsawGame,
     'jigsaw-hard': JigsawGame,
     'reversi': ReversiGame,
+    'mahjong-solitaire': MahjongGame,
+    'tile-matching': MahjongGame,
 
     // Word Games
     'word-search': WordSearchGame,
@@ -97,6 +112,8 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'hangman': HangmanGame,
     'spelling-bee': SpellingBeeGame,
     'word-ladder': WordLadderGame,
+    'cryptogram': CryptogramGame,
+    'word-association': WordAssociationGame,
 
     // Action & Arcade
     'bubble-pop': BubblePopGame,
@@ -141,6 +158,9 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'room-decorator': DrawingGame, // Fallback
     'cake-decorator': DrawingGame, // Fallback
     'pet-salon': DrawingGame, // Fallback
+    'hearts': CardGameStub,
+    'gin-rummy': CardGameStub,
+    'cribbage': CardGameStub,
 };
 
 interface GamePlayerProps {
