@@ -42,7 +42,7 @@ export default function PrivacyPolicy() {
                         <ul className="list-disc pl-5 mt-2 space-y-1">
                             <li>Provide and improve our games and services.</li>
                             <li>Analyze usage trends to enhance user experience.</li>
-                            <li>Serve non-personalized advertisements (where applicable).</li>
+                            <li>Serve advertisements (which may be personalized based on your browsing history).</li>
                             <li>Maintain the security of our platform.</li>
                         </ul>
                     </section>
@@ -59,7 +59,7 @@ export default function PrivacyPolicy() {
                     <section>
                         <h2 className="text-xl font-semibold mb-3 text-white">6. Contact Us</h2>
                         <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-                        <p className="mt-2">Email: privacy@puzzlynest.com</p>
+                        <p className="mt-2">Email: <a href="mailto:hello@puzzlynest.com" className="text-indigo-400 hover:underline">hello@puzzlynest.com</a></p>
                     </section>
                 </div>
             </div>

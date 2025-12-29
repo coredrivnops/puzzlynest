@@ -6,43 +6,27 @@ export const metadata: Metadata = {
     description: 'Read our latest articles on brain training, game tips, and educational content for all ages.',
 };
 
-// Blog posts data (in a real app, this would come from a CMS or database)
-const BLOG_POSTS = [
+// Upcoming blog topics (not published yet)
+const UPCOMING_TOPICS = [
     {
-        id: 'benefits-of-puzzle-games',
-        title: '5 Amazing Benefits of Playing Puzzle Games Daily',
-        excerpt: 'Discover how just 15 minutes of puzzle games a day can boost your memory, focus, and cognitive abilities.',
-        date: '2024-12-28',
+        title: 'Benefits of Playing Puzzle Games Daily',
         category: 'Brain Training',
         emoji: '🧩',
-        readTime: '5 min read'
     },
     {
-        id: 'best-games-for-kids-learning',
-        title: 'Top 10 Educational Games That Make Learning Fun',
-        excerpt: 'Find the perfect educational games for your children that combine entertainment with learning.',
-        date: '2024-12-25',
+        title: 'Educational Games That Make Learning Fun',
         category: 'Kids',
         emoji: '📚',
-        readTime: '7 min read'
     },
     {
-        id: 'memory-improvement-tips',
         title: 'How Memory Games Can Improve Your Daily Life',
-        excerpt: 'Science-backed techniques using memory games to enhance your recall abilities and mental sharpness.',
-        date: '2024-12-20',
         category: 'Brain Training',
         emoji: '🧠',
-        readTime: '6 min read'
     },
     {
-        id: 'screen-time-balance',
         title: 'Finding the Right Balance: Educational Screen Time',
-        excerpt: 'Tips for parents on managing screen time while ensuring kids benefit from educational games.',
-        date: '2024-12-15',
         category: 'Parenting',
         emoji: '⚖️',
-        readTime: '4 min read'
     },
 ];
 
@@ -68,102 +52,79 @@ export default function BlogPage() {
                 </p>
             </header>
 
+            {/* Coming Soon Notice */}
+            <div style={{
+                padding: '2rem',
+                background: 'rgba(99, 102, 241, 0.15)',
+                borderRadius: '1rem',
+                textAlign: 'center',
+                marginBottom: '2rem',
+                border: '1px solid rgba(99, 102, 241, 0.3)'
+            }}>
+                <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>🚧</span>
+                <h2 style={{ marginBottom: '0.5rem', color: '#a5b4fc' }}>Blog Coming Soon!</h2>
+                <p style={{ color: 'rgba(255,255,255,0.7)' }}>
+                    We&apos;re working on creating helpful content for you. Check back soon!
+                </p>
+            </div>
+
+            {/* Preview of upcoming topics */}
+            <h3 style={{ marginBottom: '1.5rem', color: 'rgba(255,255,255,0.8)' }}>
+                Topics We&apos;re Working On:
+            </h3>
+
             <div style={{
                 display: 'grid',
-                gap: '1.5rem',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
             }}>
-                {BLOG_POSTS.map((post) => (
-                    <article
-                        key={post.id}
-                        className="card hover-lift"
+                {UPCOMING_TOPICS.map((topic, index) => (
+                    <div
+                        key={index}
+                        className="card"
                         style={{
-                            padding: '1.5rem',
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }}
-                    >
-                        <div style={{
+                            padding: '1.25rem',
+                            opacity: 0.7,
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.5rem',
-                            marginBottom: '1rem'
-                        }}>
+                            gap: '1rem'
+                        }}
+                    >
+                        <span style={{ fontSize: '2rem' }}>{topic.emoji}</span>
+                        <div>
                             <span style={{
                                 background: 'rgba(99, 102, 241, 0.2)',
-                                borderRadius: '6px',
-                                padding: '0.25rem 0.5rem',
-                                fontSize: '0.8rem',
-                                color: '#a5b4fc'
-                            }}>
-                                {post.category}
-                            </span>
-                            <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem' }}>
-                                {post.readTime}
-                            </span>
-                        </div>
-
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', flex: 1 }}>
-                            <span style={{ fontSize: '2.5rem' }}>{post.emoji}</span>
-                            <div>
-                                <h2 style={{
-                                    fontSize: '1.1rem',
-                                    marginBottom: '0.5rem',
-                                    color: 'white',
-                                    lineHeight: 1.3
-                                }}>
-                                    {post.title}
-                                </h2>
-                                <p style={{
-                                    color: 'rgba(255,255,255,0.6)',
-                                    fontSize: '0.9rem',
-                                    lineHeight: 1.5
-                                }}>
-                                    {post.excerpt}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div style={{
-                            marginTop: '1rem',
-                            paddingTop: '1rem',
-                            borderTop: '1px solid rgba(255,255,255,0.1)',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center'
-                        }}>
-                            <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem' }}>
-                                {new Date(post.date).toLocaleDateString('en-US', {
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric'
-                                })}
-                            </span>
-                            <span style={{
+                                borderRadius: '4px',
+                                padding: '0.15rem 0.4rem',
+                                fontSize: '0.7rem',
                                 color: '#a5b4fc',
-                                fontSize: '0.9rem',
-                                cursor: 'pointer'
+                                marginBottom: '0.25rem',
+                                display: 'inline-block'
                             }}>
-                                Coming Soon →
+                                {topic.category}
                             </span>
+                            <h4 style={{
+                                fontSize: '0.95rem',
+                                color: 'rgba(255,255,255,0.9)',
+                                lineHeight: 1.3
+                            }}>
+                                {topic.title}
+                            </h4>
                         </div>
-                    </article>
+                    </div>
                 ))}
             </div>
 
+            {/* CTA */}
             <div style={{
                 marginTop: '3rem',
-                padding: '2rem',
-                background: 'rgba(99, 102, 241, 0.1)',
-                borderRadius: '1rem',
                 textAlign: 'center'
             }}>
-                <h3 style={{ marginBottom: '1rem' }}>🔔 Stay Updated</h3>
-                <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1rem' }}>
-                    We're working on more great content! Check back soon for full articles.
+                <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1rem' }}>
+                    In the meantime, enjoy our games!
                 </p>
                 <Link href="/games" className="btn btn-primary">
-                    Play Games While You Wait →
+                    Browse All Games →
                 </Link>
             </div>
         </main>

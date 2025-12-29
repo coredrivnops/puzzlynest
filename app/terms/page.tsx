@@ -44,13 +44,13 @@ export default function TermsOfService() {
 
                     <section>
                         <h2 className="text-xl font-semibold mb-3 text-white">5. Governing Law</h2>
-                        <p>These terms and conditions are governed by and construed in accordance with the laws of Delaware, USA, and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+                        <p>These terms and conditions are governed by and construed in accordance with applicable laws. You agree that any disputes will be resolved in accordance with the laws of the jurisdiction in which the website operator resides.</p>
                     </section>
 
                     <section>
                         <h2 className="text-xl font-semibold mb-3 text-white">6. Contact Info</h2>
                         <p>If you have any questions about these Terms, please contact us at:</p>
-                        <p className="mt-2">Email: terms@puzzlynest.com</p>
+                        <p className="mt-2">Email: <a href="mailto:hello@puzzlynest.com" className="text-indigo-400 hover:underline">hello@puzzlynest.com</a></p>
                     </section>
                 </div>
             </div>
