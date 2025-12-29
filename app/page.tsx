@@ -10,7 +10,7 @@ export default function Home() {
   const stats = getGameStats();
   const featuredGames = getFeaturedGames();
   const kidsGames = getGamesByAgeGroup('kids').slice(0, 6);
-  const seniorGames = getGamesByAgeGroup('seniors').slice(0, 6);
+  const brainGames = getGamesByAgeGroup('seniors').slice(0, 6); // Brain training games
 
   return (
     <>
@@ -98,18 +98,18 @@ export default function Home() {
           {/* Ad Banner */}
           <AdBanner type="horizontal" slot="home-mid" />
 
-          {/* Seniors Section with Elegant Design */}
+          {/* Brain Training Section */}
           <section style={{ marginBottom: '4rem' }}>
             <div className="section-header">
-              <h2 className="section-title seniors-gradient">
+              <h2 className="section-title brain-gradient">
                 🧠 Brain Training ({stats.seniors} Games)
               </h2>
-              <Link href="/games/seniors" className="btn btn-ghost">
+              <Link href="/category/brain-training" className="btn btn-ghost">
                 See All Brain Games →
               </Link>
             </div>
             <div className="game-grid">
-              {seniorGames.map(game => (
+              {brainGames.map(game => (
                 <GameCard key={game.id} game={game} />
               ))}
             </div>
@@ -182,7 +182,7 @@ export default function Home() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Welcome to PlayZen - {stats.total}+ Free Online Games
+              Welcome to PuzzlyNest - {stats.total}+ Free Online Games
             </h2>
             <p style={{
               color: 'rgba(255,255,255,0.8)',
@@ -190,9 +190,9 @@ export default function Home() {
               fontSize: '1.1rem',
               lineHeight: 1.8,
             }}>
-              PlayZen is your premium destination for free online games designed for every generation.
+              PuzzlyNest is your cozy destination for free online games designed for everyone.
               Our collection of <strong>{stats.total}+ games</strong> includes brain training puzzles
-              perfect for seniors looking to stay mentally sharp, and safe, educational games that kids will love.
+              to keep your mind sharp, and safe, fun educational games that kids will love.
             </p>
             <div style={{
               display: 'grid',

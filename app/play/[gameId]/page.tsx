@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import AdBanner from '@/components/AdBanner';
 import GamePlayer from '@/components/GamePlayer';
+import SocialShare from '@/components/SocialShare';
 import { getGameById, GAMES } from '@/lib/games';
 import Link from 'next/link';
 
@@ -18,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ gameId: s
     if (!game) return {};
 
     return {
-        title: `${game.name} - Play Free Online | PlayZen`,
-        description: `${game.description}. Play ${game.name} for free online, no download required. Perfect for ${game.ageGroup === 'kids' ? 'children' : game.ageGroup === 'seniors' ? 'seniors' : 'all ages'}.`,
+        title: `${game.name} - Play Free Online | PuzzlyNest`,
+        description: `${game.description}. Play ${game.name} for free online, no download required. Perfect for ${game.ageGroup === 'kids' ? 'children' : 'all ages'}.`,
     };
 }
 
@@ -63,7 +64,7 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                                 },
                                 "audience": {
                                     "@type": "Audience",
-                                    "audienceType": game.ageGroup === 'kids' ? 'Children' : game.ageGroup === 'seniors' ? 'Seniors' : 'General',
+                                    "audienceType": game.ageGroup === 'kids' ? 'Children' : 'General',
                                 },
                             }),
                         }}
@@ -79,7 +80,7 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                         <h2 style={{ marginBottom: '1rem' }}>About {game.name}</h2>
                         <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1rem' }}>
                             {game.description}. This free online game is part of our {game.category.replace('-', ' ')} collection
-                            and is designed for {game.ageGroup === 'kids' ? 'children ages 4-12' : game.ageGroup === 'seniors' ? 'adults 60+' : 'players of all ages'}.
+                            and is designed for {game.ageGroup === 'kids' ? 'children ages 4-12' : 'players of all ages'}.
                         </p>
                         <ul style={{ color: 'rgba(255,255,255,0.7)', marginLeft: '1.5rem' }}>
                             <li>Difficulty: {game.difficulty}</li>
@@ -87,6 +88,14 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                             <li>No download or signup required</li>
                             <li>Works on desktop and mobile devices</li>
                         </ul>
+
+                        {/* Social Share */}
+                        <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                            <SocialShare
+                                title={`Play ${game.name} on PuzzlyNest!`}
+                                description={game.description}
+                            />
+                        </div>
                     </section>
 
                     {/* Related Games */}

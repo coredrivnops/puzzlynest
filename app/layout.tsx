@@ -4,9 +4,9 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { ANALYTICS_CONFIG } from "@/lib/analytics";
 
 export const metadata: Metadata = {
-  title: "PuzzlyNest - Free Brain Games for Kids & Seniors",
-  description: "Play 100+ free online games at PuzzlyNest! Brain training puzzles for seniors and safe, fun educational games for kids. No download required!",
-  keywords: "free games, brain games, kids games, senior games, online games, puzzle games, memory games, sudoku, solitaire, puzzlynest",
+  title: "PuzzlyNest - Free Brain Games & Puzzles Online",
+  description: "Play 100+ free online games at PuzzlyNest! Brain training puzzles, educational games for kids, and fun for all ages. No download required!",
+  keywords: "free games, brain games, kids games, online games, puzzle games, memory games, sudoku, solitaire, puzzlynest, educational games",
   authors: [{ name: "PuzzlyNest" }],
   metadataBase: new URL('https://puzzlynest.com'),
   alternates: {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "PuzzlyNest - Your Cozy Corner for Brain Games",
-    description: "Free brain training games for seniors and safe, educational games for kids. 100+ games to play now!",
+    description: "Free brain training games and safe, educational games for kids. 100+ games to play now!",
     type: "website",
     siteName: "PuzzlyNest",
     url: "https://puzzlynest.com",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "PuzzlyNest - Free Brain Games",
-    description: "100+ free games for kids and seniors. Play now!",
+    description: "100+ free games for all ages. Play now!",
   },
   robots: {
     index: true,
@@ -73,7 +73,7 @@ export default function RootLayout({
               "name": "PuzzlyNest",
               "alternateName": "Puzzly Nest",
               "url": "https://puzzlynest.com",
-              "description": "Free brain games for seniors and educational games for kids. 100+ online games to play now!",
+              "description": "Free brain games and educational games for kids. 100+ online games to play now!",
               "potentialAction": {
                 "@type": "SearchAction",
                 "target": "https://puzzlynest.com/games?q={search_term_string}",
