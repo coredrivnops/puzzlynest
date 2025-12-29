@@ -34,9 +34,8 @@ export const ANALYTICS_CONFIG = {
 };
 
 export const ADS_CONFIG = {
-    // Google AdSense
-    // Apply at: https://www.google.com/adsense
-    ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-XXXXXXXXXXXXXXXXXX',
+    // Google AdSense - Same publisher ID for all PuzzlyNest domains
+    ADSENSE_CLIENT_ID: 'ca-pub-9470560014928072',
 
     // Ad Unit IDs (create these in AdSense after approval)
     AD_UNITS: {
