@@ -24,8 +24,11 @@ const FreeCellGame = dynamic(() => import('@/components/games/FreeCellGame'), { 
 const PyramidSolitaireGame = dynamic(() => import('@/components/games/PyramidSolitaireGame'), { ssr: false });
 const ConnectFourGame = dynamic(() => import('@/components/games/ConnectFourGame'), { ssr: false });
 const TangramGame = dynamic(() => import('@/components/games/TangramGame'), { ssr: false });
-const CheckersGame = dynamic(() => import('@/components/games/CheckersGame'), { ssr: false });
 const JigsawGame = dynamic(() => import('@/components/games/JigsawGame'), { ssr: false });
+const CheckersGame = dynamic(() => import('@/components/games/CheckersGame'), { ssr: false });
+const ChessPuzzlesGame = dynamic(() => import('@/components/games/ChessPuzzlesGame'), { ssr: false });
+const DominoesGame = dynamic(() => import('@/components/games/DominoesGame'), { ssr: false });
+const BackgammonGame = dynamic(() => import('@/components/games/BackgammonGame'), { ssr: false });
 const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ssr: false });
 
 // Word Games
@@ -34,6 +37,7 @@ const AnagramChallengeGame = dynamic(() => import('@/components/games/AnagramCha
 const HangmanGame = dynamic(() => import('@/components/games/HangmanGame'), { ssr: false });
 const SpellingBeeGame = dynamic(() => import('@/components/games/SpellingBeeGame'), { ssr: false });
 const WordLadderGame = dynamic(() => import('@/components/games/WordLadderGame'), { ssr: false });
+const CrosswordGame = dynamic(() => import('@/components/games/CrosswordGame'), { ssr: false });
 
 // Action & Arcade
 const BubblePopGame = dynamic(() => import('@/components/games/BubblePopGame'), { ssr: false });
@@ -77,6 +81,9 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'connect-four': ConnectFourGame,
     'tangram': TangramGame,
     'checkers': CheckersGame,
+    'chess-puzzles': ChessPuzzlesGame,
+    'dominoes': DominoesGame,
+    'backgammon': BackgammonGame,
     'jigsaw-easy': JigsawGame,
     'jigsaw-medium': JigsawGame,
     'jigsaw-hard': JigsawGame,
@@ -84,6 +91,7 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
 
     // Word Games
     'word-search': WordSearchGame,
+    'crossword-easy': CrosswordGame,
     'anagram-challenge': AnagramChallengeGame,
     'boggle': WordSearchGame,               // Placeholder as WordSearch
     'hangman': HangmanGame,
