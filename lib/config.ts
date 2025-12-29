@@ -85,9 +85,9 @@ export const AD_CONFIG = {
     maxInterstitialFrequency: 240, // 4 minutes
     levelsBeforeInterstitial: 3,
 
-    // COPPA compliance for kids games
-    kidsGameCompliance: {
-        coppaCompliant: true,
+    // Settings for kids games (child-friendly content)
+    kidsGameSettings: {
+        childDirected: true,
         noPersonalizedAds: true,
         tfcdTag: true, // Tag For Child Directed content
     },

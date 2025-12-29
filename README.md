@@ -27,7 +27,7 @@ PuzzlyNest is a free online gaming platform designed for **kids (4-12 years)** a
 - 🎵 Sound effects and music controls
 - 🏆 Achievement system with unlockables
 - 📱 Responsive design for all devices
-- 🔒 COPPA compliant for kids' safety
+- 🔒 Child-friendly games (no chat, no external links)
 - 💰 Ad-supported (free to play)
 
 ## 🛠️ Tech Stack

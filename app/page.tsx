@@ -211,7 +211,7 @@ export default function Home() {
                 <span style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>👶</span>
                 <h3 style={{ marginBottom: '0.5rem' }}>Safe for Kids</h3>
                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
-                  {stats.kids} educational & fun games, all COPPA-compliant
+                  {stats.kids} educational & fun games with no chat or external links
                 </p>
               </div>
               <div className="feature-box">

@@ -21,9 +21,9 @@ export default function PrivacyPolicy() {
                     </section>
 
                     <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">2. Children's Privacy (COPPA Compliance)</h2>
-                        <p>PuzzlyNest offers games suitable for children. We are committed to complying with the Children's Online Privacy Protection Act (COPPA). We do not knowingly collect personal information from children under the age of 13. If you are a parent or guardian and believe we have collected information from your child, please contact us immediately.</p>
-                        <p className="mt-2">For our "Kids" section, we ensure that any advertisements served are tagged as "child-directed" to prevent behavioral targeting.</p>
+                        <h2 className="text-xl font-semibold mb-3 text-white">2. Children&apos;s Privacy</h2>
+                        <p>PuzzlyNest offers games suitable for children. We do not require user accounts and do not knowingly collect personal information directly from children under the age of 13. Our games do not include chat features or external links.</p>
+                        <p className="mt-2">Please note that our website uses third-party services (Google Analytics and AdSense) that may use cookies and collect technical data. We recommend parents supervise their children&apos;s online activities. If you are a parent or guardian and have concerns, please contact us.</p>
                     </section>
 
                     <section>

@@ -45,8 +45,8 @@ export const ADS_CONFIG = {
         IN_GAME: process.env.NEXT_PUBLIC_AD_IN_GAME || '',
     },
 
-    // COPPA compliance for kids games
-    COPPA_COMPLIANT: true,
+    // Child-friendly content settings for kids games
+    CHILD_DIRECTED: true,
 
     // Ad refresh rate (seconds) - don't refresh too often
     REFRESH_RATE: 60,
