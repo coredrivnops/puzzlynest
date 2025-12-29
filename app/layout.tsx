@@ -63,6 +63,38 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9470560014928072"
           crossOrigin="anonymous"
         />
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "PuzzlyNest",
+              "alternateName": "Puzzly Nest",
+              "url": "https://puzzlynest.com",
+              "description": "Free brain games for seniors and educational games for kids. 100+ online games to play now!",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://puzzlynest.com/games?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "PuzzlyNest",
+              "url": "https://puzzlynest.com",
+              "logo": "https://puzzlynest.com/favicon.ico",
+              "sameAs": []
+            })
+          }}
+        />
       </head>
       <body>
         {/* Google Analytics */}
