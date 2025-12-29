@@ -1,10 +1,32 @@
 // Analytics and Ads Configuration for PuzzlyNest
-// Replace placeholder IDs with your actual IDs after creating accounts
+// Domain-specific configuration for puzzlynest.com and puzzlynest.io
+
+// GA Measurement IDs per domain
+const GA_IDS = {
+    'puzzlynest.com': 'G-VD91T63N38',
+    'puzzlynest.io': 'G-4TNJ2KRK76',
+    'default': 'G-VD91T63N38', // Default to .com
+};
+
+// Function to get the correct GA ID based on current domain
+export function getGAMeasurementId(): string {
+    if (typeof window !== 'undefined') {
+        const hostname = window.location.hostname;
+        if (hostname.includes('puzzlynest.io')) {
+            return GA_IDS['puzzlynest.io'];
+        }
+        if (hostname.includes('puzzlynest.com')) {
+            return GA_IDS['puzzlynest.com'];
+        }
+    }
+    // Server-side or fallback
+    return process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || GA_IDS['default'];
+}
 
 export const ANALYTICS_CONFIG = {
-    // Google Analytics 4
-    // Create property at: https://analytics.google.com/
-    GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX',
+    // Google Analytics 4 - Domain-specific IDs
+    GA_MEASUREMENT_ID: GA_IDS['default'], // Static fallback for SSR
+    GA_IDS, // Export all IDs for reference
 
     // Google Search Console
     // Verify at: https://search.google.com/search-console

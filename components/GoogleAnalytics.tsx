@@ -1,20 +1,27 @@
 'use client';
 
 import Script from 'next/script';
-import { ANALYTICS_CONFIG } from '@/lib/analytics';
+import { useEffect, useState } from 'react';
+import { getGAMeasurementId, ANALYTICS_CONFIG } from '@/lib/analytics';
 
 export default function GoogleAnalytics() {
-    const GA_MEASUREMENT_ID = ANALYTICS_CONFIG.GA_MEASUREMENT_ID;
+    const [measurementId, setMeasurementId] = useState<string | null>(null);
 
-    // Don't render if no valid GA ID
-    if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+    useEffect(() => {
+        // Get the correct measurement ID based on current domain
+        const gaId = getGAMeasurementId();
+        setMeasurementId(gaId);
+    }, []);
+
+    // Don't render until we have the correct ID (client-side)
+    if (!measurementId || measurementId === 'G-XXXXXXXXXX') {
         return null;
     }
 
     return (
         <>
             <Script
-                src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
                 strategy="afterInteractive"
             />
             <Script id="google-analytics" strategy="afterInteractive">
@@ -22,7 +29,7 @@ export default function GoogleAnalytics() {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${GA_MEASUREMENT_ID}', {
+                    gtag('config', '${measurementId}', {
                         page_path: window.location.pathname,
                         anonymize_ip: true,
                         cookie_flags: 'SameSite=None;Secure'
