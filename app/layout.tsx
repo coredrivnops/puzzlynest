@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import { AdSenseScript } from "@/components/AdSense";
 import { ANALYTICS_CONFIG } from "@/lib/analytics";
 
 export const metadata: Metadata = {
@@ -58,13 +57,16 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#6366f1" />
+        {/* Google AdSense - in head for verification */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9470560014928072"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         {/* Google Analytics */}
         <GoogleAnalytics />
-
-        {/* Google AdSense Script */}
-        <AdSenseScript />
 
         {/* Animated Background */}
         <div className="bg-orbs">
