@@ -36,6 +36,8 @@ const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ss
 const MahjongGame = dynamic(() => import('@/components/games/MahjongGame'), { ssr: false });
 const MatchThreeGame = dynamic(() => import('@/components/games/MatchThreeGame'), { ssr: false });
 const HeartsGame = dynamic(() => import('@/components/games/HeartsGame'), { ssr: false });
+const GinRummyGame = dynamic(() => import('@/components/games/GinRummyGame'), { ssr: false });
+const CribbageGame = dynamic(() => import('@/components/games/CribbageGame'), { ssr: false });
 const MosaicPuzzlesGame = dynamic(() => import('@/components/games/MosaicPuzzlesGame'), { ssr: false });
 const CardGameStub = dynamic(() => import('@/components/games/CardGameStub'), { ssr: false });
 
@@ -124,8 +126,8 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'tile-matching': MahjongGame,
     'match-three-zen': MatchThreeGame,
     'hearts': HeartsGame,
-    'gin-rummy': CardGameStub,
-    'cribbage': CardGameStub,
+    'gin-rummy': GinRummyGame,
+    'cribbage': CribbageGame,
 
     // Word Games
     'word-search': WordSearchGame,

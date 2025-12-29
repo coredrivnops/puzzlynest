@@ -89,14 +89,6 @@ export default function ContactPage() {
                         </p>
                     </div>
                 </div>
-
-                <p style={{
-                    marginTop: '2rem',
-                    color: 'rgba(255,255,255,0.5)',
-                    fontSize: '0.85rem'
-                }}>
-                    We typically respond within 24-48 hours.
-                </p>
             </div>
         </main>
     );

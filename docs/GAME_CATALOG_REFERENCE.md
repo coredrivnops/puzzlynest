@@ -50,13 +50,13 @@
 | `checkers` | Checkers vs AI | `CheckersGame.tsx` | ✅ Authentic - Full rules with AI |
 | `chess-puzzles` | Chess Puzzles | `ChessPuzzlesGame.tsx` | ✅ Authentic - FEN-based mate puzzles |
 | `dominoes` | Dominoes | `DominoesGame.tsx` | ✅ Authentic - End matching with AI |
-| `backgammon` | Backgammon | `BackgammonGame.tsx` | ⏳ Coming Soon placeholder |
+| `backgammon` | Backgammon | `BackgammonGame.tsx` | ✅ Authentic - Dice, checkers, AI opponent |
 | `reversi` | Reversi (Othello) | `ReversiGame.tsx` | ✅ Authentic - Full flip logic with AI |
 | `connect-four` | Connect Four | `ConnectFourGame.tsx` | ✅ Authentic - Win detection with AI |
 | `minesweeper` | Minesweeper | `MinesweeperGame.tsx` | ✅ Authentic - Full mine logic |
-| `hearts` | Hearts | `CardGameStub.tsx` | ⏳ Coming Soon placeholder |
-| `gin-rummy` | Gin Rummy | `CardGameStub.tsx` | ⏳ Coming Soon placeholder |
-| `cribbage` | Cribbage | `CardGameStub.tsx` | ⏳ Coming Soon placeholder |
+| `hearts` | Hearts | `HeartsGame.tsx` | ✅ Authentic - 4-player trick-taking with AI |
+| `gin-rummy` | Gin Rummy | `GinRummyGame.tsx` | ✅ Authentic - Sets, runs, knocking with AI |
+| `cribbage` | Cribbage | `CribbageGame.tsx` | ✅ Authentic - Full scoring, peg board |
 | `pyramid-solitaire` | Pyramid Solitaire | `PyramidSolitaireGame.tsx` | ✅ Authentic - Pair-matching to 13 |
 
 ---

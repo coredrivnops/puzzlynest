@@ -140,11 +140,46 @@ const difficultyColors: Record<string, string> = {
     hard: '#ef4444',
 };
 
+// Badge configurations for highlighting special games
+const badgeConfig: Record<string, { label: string; emoji: string; gradient: string; textColor: string }> = {
+    'new': {
+        label: 'NEW',
+        emoji: '✨',
+        gradient: 'linear-gradient(135deg, #10b981, #059669)',
+        textColor: 'white'
+    },
+    'exclusive': {
+        label: 'EXCLUSIVE',
+        emoji: '💎',
+        gradient: 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
+        textColor: 'white'
+    },
+    'hot': {
+        label: 'HOT',
+        emoji: '🔥',
+        gradient: 'linear-gradient(135deg, #ef4444, #dc2626)',
+        textColor: 'white'
+    },
+    'premium': {
+        label: 'PREMIUM',
+        emoji: '⭐',
+        gradient: 'linear-gradient(135deg, #f59e0b, #d97706)',
+        textColor: '#0f0f23'
+    },
+    'ai-powered': {
+        label: 'AI vs YOU',
+        emoji: '🤖',
+        gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+        textColor: 'white'
+    },
+};
+
 export default function GameCard({ game }: GameCardProps) {
     const [isHovered, setIsHovered] = useState(false);
     const bgColor = categoryColors[game.category] || '#6366f1';
     const icon = gameIcons[game.id] || '🎮';
     const difficultyColor = difficultyColors[game.difficulty] || '#6366f1';
+    const badge = game.badge ? badgeConfig[game.badge] : (game.premium ? badgeConfig['premium'] : null);
 
     return (
         <Link
@@ -182,23 +217,26 @@ export default function GameCard({ game }: GameCardProps) {
                     zIndex: 0,
                 }} />
 
-                {/* Premium Badge for Featured Games */}
-                {game.premium && (
+                {/* Dynamic Badge for Special Games */}
+                {badge && (
                     <div style={{
                         position: 'absolute',
                         top: '12px',
                         right: '12px',
-                        background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                        background: badge.gradient,
                         padding: '0.4rem 0.8rem',
                         borderRadius: '100px',
                         fontSize: '0.75rem',
                         fontWeight: 700,
-                        color: '#0f0f23',
+                        color: badge.textColor,
                         zIndex: 3,
-                        boxShadow: '0 4px 12px rgba(245, 158, 11, 0.4)',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
                         animation: 'pulse-scale 2s ease-in-out infinite',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.25rem',
                     }}>
-                        ⭐ PREMIUM
+                        {badge.emoji} {badge.label}
                     </div>
                 )}
 

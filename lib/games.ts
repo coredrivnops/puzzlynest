@@ -2,6 +2,7 @@
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type AgeGroup = 'kids' | 'seniors' | 'all-ages';
+export type GameBadge = 'new' | 'exclusive' | 'hot' | 'premium' | 'ai-powered';
 
 export interface Game {
     id: string;
@@ -14,6 +15,7 @@ export interface Game {
     estimatedPlayTime: number; // minutes
     tags: string[];
     premium?: boolean; // For special/featured games
+    badge?: GameBadge; // Visual badge to highlight game
 }
 
 // Complete 100-game catalog
@@ -246,6 +248,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/checkers.jpg',
         estimatedPlayTime: 10,
         tags: ['board', 'strategy', 'ai'],
+        badge: 'ai-powered',
     },
     {
         id: 'chess-puzzles',
@@ -257,6 +260,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/chess.jpg',
         estimatedPlayTime: 5,
         tags: ['chess', 'strategy', 'puzzle'],
+        badge: 'exclusive',
     },
     {
         id: 'dominoes',
@@ -279,6 +283,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/backgammon.jpg',
         estimatedPlayTime: 12,
         tags: ['board', 'strategy', 'dice'],
+        badge: 'new',
     },
     {
         id: 'reversi',
@@ -290,6 +295,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/reversi.jpg',
         estimatedPlayTime: 10,
         tags: ['board', 'strategy'],
+        badge: 'ai-powered',
     },
     {
         id: 'connect-four',
@@ -301,6 +307,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/connect4.jpg',
         estimatedPlayTime: 5,
         tags: ['board', 'strategy'],
+        badge: 'ai-powered',
     },
     {
         id: 'minesweeper',
@@ -323,6 +330,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/hearts.jpg',
         estimatedPlayTime: 10,
         tags: ['cards', 'strategy'],
+        badge: 'hot',
     },
     {
         id: 'gin-rummy',
@@ -334,6 +342,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/gin.jpg',
         estimatedPlayTime: 8,
         tags: ['cards', 'matching'],
+        badge: 'new',
     },
     {
         id: 'cribbage',
@@ -345,6 +354,7 @@ export const GAMES: Game[] = [
         thumbnail: '/games/cribbage.jpg',
         estimatedPlayTime: 12,
         tags: ['cards', 'scoring'],
+        badge: 'exclusive',
     },
     {
         id: 'pyramid-solitaire',
