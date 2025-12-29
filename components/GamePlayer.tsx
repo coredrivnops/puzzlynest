@@ -13,14 +13,14 @@ const SudokuGame = dynamic(() => import('@/components/games/SudokuGame'), { ssr:
 const MinesweeperGame = dynamic(() => import('@/components/games/MinesweeperGame'), { ssr: false });
 const LogicGridGame = dynamic(() => import('@/components/games/LogicGridGame'), { ssr: false });
 const KakuroGame = dynamic(() => import('@/components/games/KakuroGame'), { ssr: false });
-const CardGameStub = dynamic(() => import('@/components/games/CardGameStub'), { ssr: false });
 const NumberSequenceGame = dynamic(() => import('@/components/games/NumberSequenceGame'), { ssr: false });
 const SimonSaysGame = dynamic(() => import('@/components/games/SimonSaysGame'), { ssr: false });
 const PatternGame = dynamic(() => import('@/components/games/PatternGame'), { ssr: false });
 const NonogramGame = dynamic(() => import('@/components/games/NonogramGame'), { ssr: false });
 const NumberBondsGame = dynamic(() => import('@/components/games/NumberBondsGame'), { ssr: false });
+const MentalMathGame = dynamic(() => import('@/components/games/MentalMathGame'), { ssr: false });
 
-// Classic Games
+// Classic Card & Board Games
 const SolitaireGame = dynamic(() => import('@/components/games/SolitaireGame'), { ssr: false });
 const SpiderSolitaireGame = dynamic(() => import('@/components/games/SpiderSolitaireGame'), { ssr: false });
 const FreeCellGame = dynamic(() => import('@/components/games/FreeCellGame'), { ssr: false });
@@ -34,6 +34,8 @@ const DominoesGame = dynamic(() => import('@/components/games/DominoesGame'), { 
 const BackgammonGame = dynamic(() => import('@/components/games/BackgammonGame'), { ssr: false });
 const ReversiGame = dynamic(() => import('@/components/games/ReversiGame'), { ssr: false });
 const MahjongGame = dynamic(() => import('@/components/games/MahjongGame'), { ssr: false });
+const MatchThreeGame = dynamic(() => import('@/components/games/MatchThreeGame'), { ssr: false });
+const CardGameStub = dynamic(() => import('@/components/games/CardGameStub'), { ssr: false });
 
 // Word Games
 const WordSearchGame = dynamic(() => import('@/components/games/WordSearchGame'), { ssr: false });
@@ -44,6 +46,7 @@ const WordLadderGame = dynamic(() => import('@/components/games/WordLadderGame')
 const CrosswordGame = dynamic(() => import('@/components/games/CrosswordGame'), { ssr: false });
 const CryptogramGame = dynamic(() => import('@/components/games/CryptogramGame'), { ssr: false });
 const WordAssociationGame = dynamic(() => import('@/components/games/WordAssociationGame'), { ssr: false });
+const BoggleGame = dynamic(() => import('@/components/games/BoggleGame'), { ssr: false });
 
 // Action & Arcade
 const BubblePopGame = dynamic(() => import('@/components/games/BubblePopGame'), { ssr: false });
@@ -52,6 +55,15 @@ const BalloonPopGame = dynamic(() => import('@/components/games/BalloonPopGame')
 const FlappyGame = dynamic(() => import('@/components/games/FlappyGame'), { ssr: false });
 const BrickBreakerGame = dynamic(() => import('@/components/games/BrickBreakerGame'), { ssr: false });
 const FruitCatcherGame = dynamic(() => import('@/components/games/FruitCatcherGame'), { ssr: false });
+const SpaceShooterGame = dynamic(() => import('@/components/games/SpaceShooterGame'), { ssr: false });
+const EndlessRunnerGame = dynamic(() => import('@/components/games/EndlessRunnerGame'), { ssr: false });
+const StackBlocksGame = dynamic(() => import('@/components/games/StackBlocksGame'), { ssr: false });
+const DodgeObstaclesGame = dynamic(() => import('@/components/games/DodgeObstaclesGame'), { ssr: false });
+const RacingGame = dynamic(() => import('@/components/games/RacingGame'), { ssr: false });
+const TreasureHuntGame = dynamic(() => import('@/components/games/TreasureHuntGame'), { ssr: false });
+const ButterflyCatchGame = dynamic(() => import('@/components/games/ButterflyCatchGame'), { ssr: false });
+const FishFeedingGame = dynamic(() => import('@/components/games/FishFeedingGame'), { ssr: false });
+const PenguinSlideGame = dynamic(() => import('@/components/games/PenguinSlideGame'), { ssr: false });
 
 // Kids Learning & Creative
 const CountingGame = dynamic(() => import('@/components/games/CountingGame'), { ssr: false });
@@ -59,6 +71,15 @@ const QuizGame = dynamic(() => import('@/components/games/QuizGame'), { ssr: fal
 const DrawingGame = dynamic(() => import('@/components/games/DrawingGame'), { ssr: false });
 const ClockGame = dynamic(() => import('@/components/games/ClockGame'), { ssr: false });
 const MathAdventureGame = dynamic(() => import('@/components/games/MathAdventureGame'), { ssr: false });
+const ABCTracingGame = dynamic(() => import('@/components/games/ABCTracingGame'), { ssr: false });
+const MusicMakerGame = dynamic(() => import('@/components/games/MusicMakerGame'), { ssr: false });
+const FaceMakerGame = dynamic(() => import('@/components/games/FaceMakerGame'), { ssr: false });
+const PizzaMakerGame = dynamic(() => import('@/components/games/PizzaMakerGame'), { ssr: false });
+const GardenPlantingGame = dynamic(() => import('@/components/games/GardenPlantingGame'), { ssr: false });
+const SpotDifferenceGame = dynamic(() => import('@/components/games/SpotDifferenceGame'), { ssr: false });
+const HiddenObjectsGame = dynamic(() => import('@/components/games/HiddenObjectsGame'), { ssr: false });
+const StickerSceneGame = dynamic(() => import('@/components/games/StickerSceneGame'), { ssr: false });
+const DressUpGame = dynamic(() => import('@/components/games/DressUpGame'), { ssr: false });
 
 // Map game IDs to their authentic implementations
 const gameComponents: Record<string, React.ComponentType<any>> = {
@@ -77,16 +98,12 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'spatial-reasoning': PatternGame,
     'logic-grid': LogicGridGame,
     'kakuro': KakuroGame,
-    'brain-teasers': LogicGridGame, // Placeholder
-    'spot-difference': CardGameStub,
-    'hidden-objects': CardGameStub,
-    'mosaic-puzzles': CardGameStub,
-    'dot-connect': DrawingGame, // Trace mode stub
+    'brain-teasers': LogicGridGame,
     'nonogram': NonogramGame,
     'number-bonds': NumberBondsGame,
-    'mental-math': NumberBondsGame,
+    'mental-math': MentalMathGame,
 
-    // Classic Games
+    // Classic Card & Board Games
     'solitaire-klondike': SolitaireGame,
     'solitaire-spider': SpiderSolitaireGame,
     'solitaire-freecell': FreeCellGame,
@@ -103,17 +120,22 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'reversi': ReversiGame,
     'mahjong-solitaire': MahjongGame,
     'tile-matching': MahjongGame,
+    'match-three-zen': MatchThreeGame,
+    'hearts': CardGameStub,
+    'gin-rummy': CardGameStub,
+    'cribbage': CardGameStub,
 
     // Word Games
     'word-search': WordSearchGame,
     'crossword-easy': CrosswordGame,
     'anagram-challenge': AnagramChallengeGame,
-    'boggle': WordSearchGame,               // Placeholder as WordSearch
+    'boggle': BoggleGame,
     'hangman': HangmanGame,
     'spelling-bee': SpellingBeeGame,
     'word-ladder': WordLadderGame,
     'cryptogram': CryptogramGame,
     'word-association': WordAssociationGame,
+    'vocabulary-builder': QuizGame,
 
     // Action & Arcade
     'bubble-pop': BubblePopGame,
@@ -122,16 +144,25 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'balloon-pop': BalloonPopGame,
     'flappy-game': FlappyGame,
     'flying-game': FlappyGame,
-    'endless-runner': FlappyGame,
-    'jump-adventure': FlappyGame,
+    'endless-runner': EndlessRunnerGame,
+    'jump-adventure': EndlessRunnerGame,
     'brick-breaker': BrickBreakerGame,
     'break-the-bricks': BrickBreakerGame,
     'fruit-catcher': FruitCatcherGame,
     'catch-the-fruit': FruitCatcherGame,
     'candy-collect': FruitCatcherGame,
+    'space-shooter-kids': SpaceShooterGame,
+    'dodge-obstacles': DodgeObstaclesGame,
+    'stack-blocks': StackBlocksGame,
+    'treasure-hunt': TreasureHuntGame,
+    'racing-simple': RacingGame,
+    'fish-feeding': FishFeedingGame,
+    'penguin-slide': PenguinSlideGame,
+    'butterfly-catch': ButterflyCatchGame,
 
     // Kids Learning
     'counting-fun': CountingGame,
+    'abc-tracing': ABCTracingGame,
     'color-learning': QuizGame,
     'shape-matching': QuizGame,
     'money-counting': QuizGame,
@@ -141,26 +172,33 @@ const gameComponents: Record<string, React.ComponentType<any>> = {
     'animal-sounds': QuizGame,
     'seasons-weather': QuizGame,
     'body-parts': QuizGame,
-    'vocabulary-builder': QuizGame,
     'basic-math-addition': MathAdventureGame,
     'basic-math-subtraction': MathAdventureGame,
     'clock-reading': ClockGame,
 
-    // Creative
+    // Creative Play
     'coloring-book': DrawingGame,
-    'coloring-mandala': DrawingGame, // Simplified
+    'coloring-mandala': DrawingGame,
     'drawing-pad': DrawingGame,
-    'sticker-scene': DrawingGame,
+    'sticker-scene': StickerSceneGame,
     'pixel-art': DrawingGame,
     'stamp-art': DrawingGame,
     'pattern-designer': DrawingGame,
-    'dress-up': DrawingGame, // Fallback to drawing
-    'room-decorator': DrawingGame, // Fallback
-    'cake-decorator': DrawingGame, // Fallback
-    'pet-salon': DrawingGame, // Fallback
-    'hearts': CardGameStub,
-    'gin-rummy': CardGameStub,
-    'cribbage': CardGameStub,
+    'dress-up': DressUpGame,
+    'room-decorator': DrawingGame,
+    'cake-decorator': DrawingGame,
+    'pet-salon': DrawingGame,
+    'music-maker': MusicMakerGame,
+    'face-maker': FaceMakerGame,
+    'garden-planting': GardenPlantingGame,
+    'pizza-maker': PizzaMakerGame,
+    'band-creator': MusicMakerGame,
+
+    // Visual/Observation
+    'spot-difference': SpotDifferenceGame,
+    'hidden-objects': HiddenObjectsGame,
+    'mosaic-puzzles': CardGameStub,
+    'dot-connect': DrawingGame,
 };
 
 interface GamePlayerProps {
