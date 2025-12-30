@@ -50,7 +50,7 @@ export default function TermsOfService() {
                     <section>
                         <h2 className="text-xl font-semibold mb-3 text-white">6. Contact Info</h2>
                         <p>If you have any questions about these Terms, please contact us at:</p>
-                        <p className="mt-2">Email: <a href="mailto:hello@puzzlynest.com" className="text-indigo-400 hover:underline">hello@puzzlynest.com</a></p>
+                        <p className="mt-2">Email: <a href="mailto:solutions@coredrivn.com" className="text-indigo-400 hover:underline">solutions@coredrivn.com</a></p>
                     </section>
                 </div>
             </div>

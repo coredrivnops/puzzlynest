@@ -31,11 +31,20 @@ export default function ContactPage() {
 
                 <p style={{
                     color: 'rgba(255,255,255,0.8)',
-                    marginBottom: '2rem',
+                    marginBottom: '1rem',
                     lineHeight: 1.8
                 }}>
                     We love hearing from our players! Whether you have feedback,
                     suggestions for new games, or just want to say hi, feel free to reach out.
+                </p>
+
+                <p style={{
+                    color: '#fbbf24',
+                    marginBottom: '2rem',
+                    lineHeight: 1.8,
+                    fontWeight: 500
+                }}>
+                    Please note: We are still in development and more games and updates are on the way!
                 </p>
 
                 <div style={{
@@ -48,7 +57,7 @@ export default function ContactPage() {
                         Email us at:
                     </p>
                     <a
-                        href="mailto:hello@puzzlynest.com"
+                        href="mailto:solutions@coredrivn.com"
                         style={{
                             color: '#a5b4fc',
                             fontSize: '1.25rem',
@@ -56,7 +65,7 @@ export default function ContactPage() {
                             textDecoration: 'none'
                         }}
                     >
-                        hello@puzzlynest.com
+                        solutions@coredrivn.com
                     </a>
                 </div>
 
