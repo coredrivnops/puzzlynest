@@ -57,6 +57,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#6366f1" />
+        <meta name="google-adsense-account" content="ca-pub-9470560014928072" />
         {/* Google AdSense - in head for verification */}
         <script
           async
