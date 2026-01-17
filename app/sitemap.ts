@@ -30,6 +30,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${baseUrl}/tools/word-search-maker`, lastModified: currentDate, changeFrequency: 'monthly' as const, priority: 0.85 },
     ];
 
+    // SEO Landing Pages - High-value pages targeting popular search keywords
+    const seoLandingPages = [
+        { url: `${baseUrl}/free-online-puzzles`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.9 },
+        { url: `${baseUrl}/memory-games-online`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.9 },
+        { url: `${baseUrl}/word-games-online`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.9 },
+        { url: `${baseUrl}/logic-puzzles-free`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.9 },
+        { url: `${baseUrl}/solitaire-games`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.9 },
+    ];
+
     // Category pages - Only categories with actual games
     const categoryPages = GAME_CATEGORIES.map(category => ({
         url: `${baseUrl}/category/${category.id}`,
@@ -46,5 +55,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
     }));
 
-    return [...staticPages, ...toolPages, ...categoryPages, ...gamePages];
+    return [...staticPages, ...toolPages, ...seoLandingPages, ...categoryPages, ...gamePages];
 }
