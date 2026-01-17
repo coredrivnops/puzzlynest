@@ -48,15 +48,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Force dark color scheme on mobile */}
+        <meta name="color-scheme" content="dark" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#6366f1" />
+        {/* Dark navy theme color for mobile browser chrome */}
+        <meta name="theme-color" content="#0f0f23" />
+        <meta name="theme-color" content="#0f0f23" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#0f0f23" media="(prefers-color-scheme: light)" />
         {/* AdSense will be added here after approval with new coredrivn.ops Publisher ID */}
         {/* Structured Data for SEO - Enhanced schemas */}
         <script
@@ -72,7 +77,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body style={{ backgroundColor: '#0f0f23' }}>
         {/* Google Analytics */}
         <GoogleAnalytics />
 

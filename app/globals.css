@@ -3,6 +3,9 @@
 @import "tailwindcss";
 
 :root {
+  /* Force dark mode on all devices - prevents mobile light mode overrides */
+  color-scheme: dark;
+
   /* Color Palette - Vibrant & Accessible */
   --primary: #6366f1;
   --primary-light: #818cf8;
@@ -12,7 +15,8 @@
   --success: #10b981;
   --danger: #ef4444;
 
-  /* Background Gradients */
+  /* Background Colors - Dark Navy Theme */
+  --bg-solid: #0f0f23;
   --bg-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
   --card-gradient: linear-gradient(145deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05));
   --glow-primary: 0 0 40px rgba(99, 102, 241, 0.3);
@@ -27,6 +31,14 @@
   --border-radius-lg: 24px;
 }
 
+/* Prevent any light mode color scheme on any browser/device */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark;
+    background-color: #0f0f23;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -36,17 +48,24 @@
 html {
   font-size: 18px;
   scroll-behavior: smooth;
+  /* Force dark color scheme on all devices including mobile */
+  color-scheme: dark;
+  background-color: #0f0f23;
 }
 
 body {
   font-family: var(--font-main);
   background: var(--bg-gradient);
+  /* Explicit fallback background color for mobile */
+  background-color: #0f0f23;
   color: #f1f5f9;
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   position: relative;
   overflow-x: hidden;
+  /* Prevent light mode overrides on iOS/Android */
+  color-scheme: dark;
 }
 
 /* ==== EXCEPTIONAL VISUAL EFFECTS ==== */
