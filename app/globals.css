@@ -782,16 +782,83 @@ body {
   font-size: 0.875rem;
 }
 
-/* Ad Banner Placeholder */
-.ad-banner {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
+/* Ad styles removed - using native AdSense only when approved */
+
+/* Mobile Navigation Styles */
+.nav-hamburger {
+  display: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 0.75rem;
+  z-index: 1002;
+  position: relative;
+}
+
+.nav-mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* SOLID background - NO transparency */
+  background: #0a0a1a;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  animation: mobileMenuSlide 0.3s ease;
+}
+
+/* Close button area at top */
+.nav-mobile-menu::before {
+  content: '✕ Close Menu';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.875rem;
-  margin: 1.5rem 0;
+}
+
+@keyframes mobileMenuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-mobile-link {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  /* Solid card background */
+  background: linear-gradient(135deg, #1e1e4a 0%, #15153a 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.nav-mobile-link:hover,
+.nav-mobile-link:active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-color: var(--primary);
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 /* Responsive */
@@ -808,8 +875,12 @@ body {
     gap: 1.5rem;
   }
 
-  .nav-links {
+  .nav-desktop {
     display: none;
+  }
+
+  .nav-hamburger {
+    display: block;
   }
 
   .game-grid {

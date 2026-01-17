@@ -7,6 +7,8 @@ export default function Footer() {
         <footer className="footer">
             <div className="footer-links">
                 <Link href="/about" className="footer-link">About</Link>
+                <Link href="/blog" className="footer-link">Blog</Link>
+                <Link href="/sitemap-html" className="footer-link">Sitemap</Link>
                 <Link href="/privacy" className="footer-link">Privacy Policy</Link>
                 <Link href="/terms" className="footer-link">Terms of Use</Link>
                 <Link href="/contact" className="footer-link">Contact</Link>

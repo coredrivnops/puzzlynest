@@ -1,10 +1,12 @@
 import { notFound } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import AdBanner from '@/components/AdBanner';
+
 import GamePlayer from '@/components/GamePlayer';
 import SocialShare from '@/components/SocialShare';
 import { getGameById, GAMES } from '@/lib/games';
+import { getSEOContent } from '@/lib/seoContent';
+import { getGameSchema, getBreadcrumbSchema, stringifySchema } from '@/lib/structuredData';
 import Link from 'next/link';
 
 export function generateStaticParams() {
@@ -27,6 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ gameId: s
 export default async function GamePage({ params }: { params: Promise<{ gameId: string }> }) {
     const { gameId } = await params;
     const game = getGameById(gameId);
+    const seoContent = getSEOContent(gameId);
 
     if (!game) {
         notFound();
@@ -37,36 +40,29 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
             <Navigation />
 
             <main>
-                <AdBanner type="horizontal" slot="game-top" />
 
                 <GamePlayer game={game} />
 
-                <AdBanner type="horizontal" slot="game-bottom" />
 
                 {/* SEO Content & Related Games */}
                 <div className="container" style={{ marginTop: '2rem' }}>
-                    {/* Structured Data */}
+                    {/* Enhanced Structured Data - VideoGame Schema */}
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{
-                            __html: JSON.stringify({
-                                "@context": "https://schema.org",
-                                "@type": "VideoGame",
-                                "name": game.name,
-                                "description": game.description,
-                                "genre": game.category,
-                                "gamePlatform": "Web Browser",
-                                "applicationCategory": "Game",
-                                "offers": {
-                                    "@type": "Offer",
-                                    "price": "0",
-                                    "priceCurrency": "USD"
-                                },
-                                "audience": {
-                                    "@type": "Audience",
-                                    "audienceType": game.ageGroup === 'kids' ? 'Children' : 'General',
-                                },
-                            }),
+                            __html: stringifySchema(getGameSchema(game)),
+                        }}
+                    />
+                    {/* Breadcrumb Schema for navigation context */}
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: stringifySchema(getBreadcrumbSchema([
+                                { name: 'Home', url: '/' },
+                                { name: 'Games', url: '/games' },
+                                { name: game.category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), url: `/category/${game.category}` },
+                                { name: game.name, url: `/play/${game.id}` }
+                            ])),
                         }}
                     />
 
@@ -97,6 +93,48 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                             />
                         </div>
                     </section>
+
+                    {/* Extended SEO Guide - "Learn to Play" Section */}
+                    {seoContent && (
+                        <section style={{ marginBottom: '2rem' }}>
+                            {/* How to Play Card */}
+                            <div className="card" style={{
+                                padding: '2rem',
+                                marginBottom: '1.5rem',
+                                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05))',
+                                border: '1px solid rgba(99, 102, 241, 0.2)',
+                            }}>
+                                <div
+                                    style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.8 }}
+                                    dangerouslySetInnerHTML={{ __html: seoContent.howToPlay }}
+                                />
+                            </div>
+
+                            {/* Two-column layout for strategies and benefits */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+                                <div className="card" style={{
+                                    padding: '1.5rem',
+                                    background: 'rgba(245, 158, 11, 0.08)',
+                                    border: '1px solid rgba(245, 158, 11, 0.2)',
+                                }}>
+                                    <div
+                                        style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}
+                                        dangerouslySetInnerHTML={{ __html: seoContent.strategies }}
+                                    />
+                                </div>
+                                <div className="card" style={{
+                                    padding: '1.5rem',
+                                    background: 'rgba(16, 185, 129, 0.08)',
+                                    border: '1px solid rgba(16, 185, 129, 0.2)',
+                                }}>
+                                    <div
+                                        style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}
+                                        dangerouslySetInnerHTML={{ __html: seoContent.benefits }}
+                                    />
+                                </div>
+                            </div>
+                        </section>
+                    )}
 
                     {/* Related Games */}
                     <section>

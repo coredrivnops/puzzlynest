@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface SocialShareProps {
     url?: string;
@@ -11,9 +11,15 @@ interface SocialShareProps {
 
 export default function SocialShare({ url, title, description, gameScore }: SocialShareProps) {
     const [copied, setCopied] = useState(false);
+    const [supportsNativeShare, setSupportsNativeShare] = useState(false);
+    const [shareUrl, setShareUrl] = useState('');
 
-    // Use current URL if not provided
-    const shareUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
+    // Check for native share support after hydration to avoid SSR mismatch
+    useEffect(() => {
+        setSupportsNativeShare(typeof navigator !== 'undefined' && 'share' in navigator);
+        setShareUrl(url || window.location.href);
+    }, [url]);
+
     const shareTitle = title || 'Check out this game on PuzzlyNest!';
     const shareText = gameScore
         ? `I scored ${gameScore} points! ${shareTitle}`
@@ -114,8 +120,8 @@ export default function SocialShare({ url, title, description, gameScore }: Soci
                 {copied ? '✓' : '🔗'}
             </button>
 
-            {/* Native Share (mobile) */}
-            {typeof navigator !== 'undefined' && 'share' in navigator && (
+            {/* Native Share (mobile) - only show after hydration check */}
+            {supportsNativeShare && (
                 <button
                     onClick={handleNativeShare}
                     className="share-btn"

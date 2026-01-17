@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { ANALYTICS_CONFIG } from "@/lib/analytics";
+import { getOrganizationSchema, getWebSiteSchema, stringifySchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "PuzzlyNest - Free Brain Games & Puzzles Online",
@@ -51,49 +52,23 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#6366f1" />
-        <meta name="google-adsense-account" content="ca-pub-9470560014928072" />
-        {/* Google AdSense - in head for verification */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9470560014928072"
-          crossOrigin="anonymous"
-        />
-        {/* Structured Data for SEO */}
+        {/* AdSense will be added here after approval with new coredrivn.ops Publisher ID */}
+        {/* Structured Data for SEO - Enhanced schemas */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "PuzzlyNest",
-              "alternateName": "Puzzly Nest",
-              "url": "https://puzzlynest.com",
-              "description": "Free brain games and educational games for kids. 100+ online games to play now!",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://puzzlynest.com/games?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            })
+            __html: stringifySchema(getWebSiteSchema())
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "PuzzlyNest",
-              "url": "https://puzzlynest.com",
-              "logo": "https://puzzlynest.com/favicon.ico",
-              "sameAs": []
-            })
+            __html: stringifySchema(getOrganizationSchema())
           }}
         />
       </head>

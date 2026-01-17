@@ -34,8 +34,8 @@ export const ANALYTICS_CONFIG = {
 };
 
 export const ADS_CONFIG = {
-    // Google AdSense - Same publisher ID for all PuzzlyNest domains
-    ADSENSE_CLIENT_ID: 'ca-pub-9470560014928072',
+    // Google AdSense - Add new Publisher ID after approval with coredrivn.ops account
+    ADSENSE_CLIENT_ID: '', // TODO: Add new ca-pub-XXXXXXXXXXXXXXXX after AdSense approval
 
     // Ad Unit IDs (create these in AdSense after approval)
     AD_UNITS: {

@@ -1,68 +1,167 @@
-import React from 'react';
-import { Metadata } from 'next';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata = {
     title: 'Privacy Policy - PuzzlyNest',
-    description: 'Privacy Policy for PuzzlyNest. Learn how we protect your data and ensure a safe gaming environment for kids and seniors.',
+    description: 'Privacy Policy for PuzzlyNest. Learn how we collect, use, and protect your information.',
 };
 
-export default function PrivacyPolicy() {
+export default function PrivacyPage() {
     return (
-        <div className="min-h-screen bg-slate-900 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto bg-slate-800 rounded-2xl shadow-xl p-8 border border-slate-700">
-                <h1 className="text-3xl font-bold mb-8 text-indigo-400">Privacy Policy</h1>
+        <>
+            <Navigation />
 
-                <div className="space-y-6 text-slate-300">
-                    <p className="text-sm text-slate-400">Last Updated: {new Date().toLocaleDateString()}</p>
+            <main style={{
+                background: 'linear-gradient(135deg, #0a0a1a 0%, #0f0f2d 50%, #0a0a1a 100%)',
+                minHeight: '100vh',
+                position: 'relative',
+                overflow: 'hidden',
+            }}>
+                {/* Animated background orbs */}
+                <div style={{
+                    position: 'absolute',
+                    top: '-20%',
+                    right: '-10%',
+                    width: '400px',
+                    height: '400px',
+                    background: 'radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    filter: 'blur(60px)',
+                    pointerEvents: 'none',
+                }} />
+                <div style={{
+                    position: 'absolute',
+                    bottom: '10%',
+                    left: '-5%',
+                    width: '300px',
+                    height: '300px',
+                    background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    filter: 'blur(60px)',
+                    pointerEvents: 'none',
+                }} />
 
-                    <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">1. Introduction</h2>
-                        <p>Welcome to PuzzlyNest. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
-                    </section>
+                <div className="container" style={{
+                    paddingTop: '2rem',
+                    paddingBottom: '4rem',
+                    maxWidth: '800px',
+                    position: 'relative',
+                    zIndex: 1,
+                }}>
+                    <h1 style={{
+                        fontSize: 'clamp(2rem, 5vw, 2.5rem)',
+                        marginBottom: '0.5rem',
+                        textAlign: 'center',
+                        background: 'linear-gradient(135deg, #fff 0%, #c7d2fe 50%, #a5b4fc 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        fontWeight: 800,
+                    }}>
+                        Privacy Policy
+                    </h1>
+                    <p style={{
+                        textAlign: 'center',
+                        color: 'rgba(255,255,255,0.5)',
+                        marginBottom: '2rem',
+                        fontSize: '0.9rem',
+                    }}>
+                        Last Updated: January 2026
+                    </p>
 
-                    <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">2. Children&apos;s Privacy</h2>
-                        <p>PuzzlyNest offers games suitable for children. We do not require user accounts and do not knowingly collect personal information directly from children under the age of 13. Our games do not include chat features or external links.</p>
-                        <p className="mt-2">Please note that our website uses third-party services (Google Analytics and AdSense) that may use cookies and collect technical data. We recommend parents supervise their children&apos;s online activities. If you are a parent or guardian and have concerns, please contact us.</p>
-                    </section>
+                    <div style={{
+                        background: 'rgba(255,255,255,0.03)',
+                        borderRadius: '24px',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        padding: '2.5rem',
+                    }}>
+                        {/* Section 1 */}
+                        <section style={{ marginBottom: '2rem' }}>
+                            <h2 style={{ color: '#c7d2fe', fontSize: '1.25rem', marginBottom: '1rem' }}>
+                                1. Introduction
+                            </h2>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}>
+                                Welcome to <strong>PuzzlyNest</strong> (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting
+                                your personal information and your right to privacy. This Privacy Policy explains how we collect,
+                                use, and share your information when you visit our website <code style={{ color: '#a5b4fc' }}>puzzlynest.com</code>.
+                            </p>
+                        </section>
 
-                    <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">3. Information We Collect</h2>
-                        <p>We collect and process the following data:</p>
-                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li><strong>Usage Data:</strong> Information about how you use our website, games, and services.</li>
-                            <li><strong>Technical Data:</strong> Internet protocol (IP) address, browser type and version, time zone setting and location, browser plug-in types and versions, operating system and platform.</li>
-                            <li><strong>Cookies:</strong> We use cookies to improve your experience and analyze traffic.</li>
-                        </ul>
-                    </section>
+                        {/* Section 2 */}
+                        <section style={{ marginBottom: '2rem' }}>
+                            <h2 style={{ color: '#c7d2fe', fontSize: '1.25rem', marginBottom: '1rem' }}>
+                                2. Advertising and Cookies (Google AdSense)
+                            </h2>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8, marginBottom: '1rem' }}>
+                                We use <strong>Google AdSense</strong> to display advertisements on our website.
+                            </p>
+                            <ul style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.9, marginLeft: '1.5rem' }}>
+                                <li style={{ marginBottom: '0.5rem' }}>
+                                    <strong>Third-Party Vendors:</strong> Third-party vendors, including Google, use cookies to serve ads
+                                    based on a user&apos;s prior visits to our website or other websites.
+                                </li>
+                                <li style={{ marginBottom: '0.5rem' }}>
+                                    <strong>DoubleClick DART Cookie:</strong> Google&apos;s use of the advertising cookie enables it and its
+                                    partners to serve ads to our users based on their visit to our site and/or other sites on the Internet.
+                                </li>
+                                <li>
+                                    <strong>Opt-Out:</strong> Users may opt-out of personalized advertising by visiting{' '}
+                                    <Link href="https://www.google.com/settings/ads" target="_blank" style={{ color: '#a5b4fc' }}>
+                                        Google Ad Settings
+                                    </Link>.
+                                </li>
+                            </ul>
+                        </section>
 
-                    <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">4. How We Use Information</h2>
-                        <p>We use your data to:</p>
-                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li>Provide and improve our games and services.</li>
-                            <li>Analyze usage trends to enhance user experience.</li>
-                            <li>Serve advertisements (which may be personalized based on your browsing history).</li>
-                            <li>Maintain the security of our platform.</li>
-                        </ul>
-                    </section>
+                        {/* Section 3 */}
+                        <section style={{ marginBottom: '2rem' }}>
+                            <h2 style={{ color: '#c7d2fe', fontSize: '1.25rem', marginBottom: '1rem' }}>
+                                3. Data Collection
+                            </h2>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8, marginBottom: '1rem' }}>
+                                We do not collect personally identifiable information (PII) like names or phone numbers unless you
+                                voluntarily contact us via email. We automatically collect non-personal data via standard server logs, such as:
+                            </p>
+                            <ul style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.9, marginLeft: '1.5rem' }}>
+                                <li>Browser type and version.</li>
+                                <li>Operating system.</li>
+                                <li>Date and time of visit.</li>
+                            </ul>
+                        </section>
 
-                    <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">5. Third-Party Services</h2>
-                        <p>We use trusted third-party services that may collect data:</p>
-                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                            <li><strong>Google Analytics:</strong> To analyze website traffic and user behavior.</li>
-                            <li><strong>Google AdSense:</strong> To serve advertisements.</li>
-                        </ul>
-                    </section>
+                        {/* Section 4 */}
+                        <section style={{ marginBottom: '2rem' }}>
+                            <h2 style={{ color: '#c7d2fe', fontSize: '1.25rem', marginBottom: '1rem' }}>
+                                4. GDPR Compliance (For European Visitors)
+                            </h2>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}>
+                                If you are visiting from the European Economic Area (EEA), you have the right to access, rectify,
+                                or erase your personal data. We comply with the IAB Transparency and Consent Framework (TCF).
+                                You may withdraw your consent for ad personalization at any time by clicking the &quot;Privacy Settings&quot;
+                                link in the footer.
+                            </p>
+                        </section>
 
-                    <section>
-                        <h2 className="text-xl font-semibold mb-3 text-white">6. Contact Us</h2>
-                        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-                        <p className="mt-2">Email: <a href="mailto:solutions@coredrivn.com" className="text-indigo-400 hover:underline">solutions@coredrivn.com</a></p>
-                    </section>
+                        {/* Section 5 - Contact */}
+                        <section>
+                            <h2 style={{ color: '#c7d2fe', fontSize: '1.25rem', marginBottom: '1rem' }}>
+                                5. Contact Us
+                            </h2>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}>
+                                If you have questions about this policy, please contact us at:
+                            </p>
+                            <p style={{ marginTop: '0.75rem' }}>
+                                <strong style={{ color: 'rgba(255,255,255,0.6)' }}>Email:</strong>{' '}
+                                <Link href="mailto:solutions@coredrivn.com" style={{ color: '#a5b4fc' }}>
+                                    solutions@coredrivn.com
+                                </Link>
+                            </p>
+                        </section>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </main>
+
+            <Footer />
+        </>
     );
 }

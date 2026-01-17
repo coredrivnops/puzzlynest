@@ -15,7 +15,21 @@ export default function AchievementsPage() {
     }, []);
 
     if (!progress) {
-        return <div>Loading...</div>;
+        return (
+            <>
+                <Navigation />
+                <main style={{
+                    background: 'linear-gradient(135deg, #0a0a1a 0%, #0f0f2d 50%, #0a0a1a 100%)',
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <div style={{ color: 'rgba(255,255,255,0.7)' }}>Loading...</div>
+                </main>
+                <Footer />
+            </>
+        );
     }
 
     const totalPoints = achievementManager.getTotalPoints();
@@ -33,175 +47,286 @@ export default function AchievementsPage() {
         <>
             <Navigation />
 
-            <main className="container" style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
-                {/* Hero Stats */}
+            {/* Dark background wrapper with animated effects */}
+            <main style={{
+                background: 'linear-gradient(135deg, #0a0a1a 0%, #0f0f2d 50%, #0a0a1a 100%)',
+                minHeight: '100vh',
+                position: 'relative',
+                overflow: 'hidden',
+            }}>
+                {/* Animated background orbs */}
                 <div style={{
-                    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1))',
-                    borderRadius: 'var(--border-radius-lg)',
-                    padding: '3rem',
-                    marginBottom: '3rem',
-                    textAlign: 'center',
-                }}>
-                    <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏆 Achievements</h1>
-                    <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2rem' }}>
-                        Track your gaming progress and unlock rewards!
-                    </p>
+                    position: 'absolute',
+                    top: '10%',
+                    left: '5%',
+                    width: '400px',
+                    height: '400px',
+                    background: 'radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    filter: 'blur(60px)',
+                    animation: 'float 20s ease-in-out infinite',
+                    pointerEvents: 'none',
+                }} />
+                <div style={{
+                    position: 'absolute',
+                    bottom: '20%',
+                    right: '10%',
+                    width: '350px',
+                    height: '350px',
+                    background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    filter: 'blur(60px)',
+                    animation: 'float 25s ease-in-out infinite reverse',
+                    pointerEvents: 'none',
+                }} />
 
-                    {/* Stats Grid */}
+                <div className="container" style={{
+                    paddingTop: '2rem',
+                    paddingBottom: '4rem',
+                    position: 'relative',
+                    zIndex: 1,
+                }}>
+                    {/* Hero Stats Card */}
                     <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                        gap: '1.5rem',
-                        maxWidth: '800px',
-                        margin: '0 auto',
+                        background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(139, 92, 246, 0.08))',
+                        borderRadius: '24px',
+                        padding: '3rem 2rem',
+                        marginBottom: '3rem',
+                        textAlign: 'center',
+                        border: '1px solid rgba(245, 158, 11, 0.2)',
+                        backdropFilter: 'blur(10px)',
+                        position: 'relative',
+                        overflow: 'hidden',
                     }}>
-                        <div className="feature-box">
-                            <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🎮</div>
-                            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)' }}>
-                                {progress.gamesPlayed}
-                            </div>
-                            <div style={{ color: 'rgba(255,255,255,0.6)' }}>Games Played</div>
-                        </div>
-
-                        <div className="feature-box">
-                            <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🏅</div>
-                            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--success)' }}>
-                                {progress.gamesWon}
-                            </div>
-                            <div style={{ color: 'rgba(255,255,255,0.6)' }}>Games Won</div>
-                        </div>
-
-                        <div className="feature-box">
-                            <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>⚡</div>
-                            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary)' }}>
-                                {progress.currentStreak}
-                            </div>
-                            <div style={{ color: 'rgba(255,255,255,0.6)' }}>Current Streak</div>
-                        </div>
-
-                        <div className="feature-box">
-                            <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>⭐</div>
-                            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)' }}>
-                                {totalPoints}
-                            </div>
-                            <div style={{ color: 'rgba(255,255,255,0.6)' }}>Total Points</div>
-                        </div>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div style={{ marginTop: '2rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                            <span>Overall Progress</span>
-                            <span>{completionPercentage}%</span>
-                        </div>
+                        {/* Decorative glow */}
                         <div style={{
-                            height: '24px',
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            borderRadius: '100px',
-                            overflow: 'hidden',
+                            position: 'absolute',
+                            top: '-100px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '300px',
+                            height: '200px',
+                            background: 'radial-gradient(ellipse, rgba(245, 158, 11, 0.2) 0%, transparent 70%)',
+                            pointerEvents: 'none',
+                        }} />
+
+                        <h1 style={{
+                            fontSize: 'clamp(2rem, 5vw, 3rem)',
+                            marginBottom: '0.75rem',
+                            position: 'relative',
                         }}>
+                            🏆 Achievements
+                        </h1>
+                        <p style={{
+                            fontSize: '1.15rem',
+                            color: 'rgba(255,255,255,0.7)',
+                            marginBottom: '2.5rem',
+                            position: 'relative',
+                        }}>
+                            Track your gaming progress and unlock rewards!
+                        </p>
+
+                        {/* Stats Grid */}
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                            gap: '1.25rem',
+                            maxWidth: '700px',
+                            margin: '0 auto 2rem',
+                            position: 'relative',
+                        }}>
+                            {[
+                                { icon: '🎮', value: progress.gamesPlayed, label: 'Games Played', color: '#f59e0b' },
+                                { icon: '🏅', value: progress.gamesWon, label: 'Games Won', color: '#10b981' },
+                                { icon: '⚡', value: progress.currentStreak, label: 'Current Streak', color: '#6366f1' },
+                                { icon: '⭐', value: totalPoints, label: 'Total Points', color: '#f59e0b' },
+                            ].map((stat, i) => (
+                                <div key={i} style={{
+                                    background: 'rgba(255,255,255,0.03)',
+                                    border: '1px solid rgba(255,255,255,0.08)',
+                                    borderRadius: '16px',
+                                    padding: '1.25rem 1rem',
+                                }}>
+                                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{stat.icon}</div>
+                                    <div style={{ fontSize: '1.75rem', fontWeight: 700, color: stat.color }}>
+                                        {stat.value}
+                                    </div>
+                                    <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div style={{ maxWidth: '500px', margin: '0 auto', position: 'relative' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                                <span style={{ color: 'rgba(255,255,255,0.7)' }}>Overall Progress</span>
+                                <span style={{ color: '#f59e0b', fontWeight: 600 }}>{completionPercentage}%</span>
+                            </div>
                             <div style={{
-                                height: '100%',
-                                width: `${completionPercentage}%`,
-                                background: 'linear-gradient(90deg, var(--primary), var(--accent))',
-                                transition: 'width 0.5s ease',
-                            }} />
+                                height: '12px',
+                                background: 'rgba(255, 255, 255, 0.1)',
+                                borderRadius: '100px',
+                                overflow: 'hidden',
+                            }}>
+                                <div style={{
+                                    height: '100%',
+                                    width: `${completionPercentage}%`,
+                                    background: 'linear-gradient(90deg, #f59e0b, #fbbf24)',
+                                    borderRadius: '100px',
+                                    transition: 'width 0.5s ease',
+                                    boxShadow: '0 0 20px rgba(245, 158, 11, 0.5)',
+                                }} />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Daily Challenge */}
-                {dailyChallenge && (
-                    <div className="card" style={{ padding: '2rem', marginBottom: '3rem' }}>
-                        <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            📅 Daily Challenge
-                        </h2>
-                        <p style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
-                            {dailyChallenge.objective}
-                        </p>
-                        <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem' }}>
-                            Reward: <span style={{ color: 'var(--accent)', fontWeight: 600 }}>+{dailyChallenge.reward.points} points</span>
-                        </p>
-                        <Link href={`/play/${dailyChallenge.gameId}`} className="btn btn-primary">
-                            Play Now →
-                        </Link>
-                    </div>
-                )}
-
-                {/* Achievements Grid */}
-                <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>All Achievements</h2>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                    gap: '1.5rem',
-                }}>
-                    {ACHIEVEMENTS.map(achievement => {
-                        const unlocked = progress.achievements.includes(achievement.id);
-                        const color = rarityColors[achievement.rarity];
-
-                        return (
-                            <div
-                                key={achievement.id}
-                                className="card"
+                    {/* Daily Challenge */}
+                    {dailyChallenge && (
+                        <div style={{
+                            padding: '2rem',
+                            marginBottom: '3rem',
+                            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05))',
+                            borderRadius: '20px',
+                            border: '1px solid rgba(99, 102, 241, 0.2)',
+                        }}>
+                            <h2 style={{
+                                fontSize: '1.5rem',
+                                marginBottom: '1rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                color: '#fff',
+                            }}>
+                                📅 Daily Challenge
+                            </h2>
+                            <p style={{ fontSize: '1.15rem', marginBottom: '0.75rem', color: '#fff' }}>
+                                {dailyChallenge.objective}
+                            </p>
+                            <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem' }}>
+                                Reward: <span style={{ color: '#f59e0b', fontWeight: 600 }}>+{dailyChallenge.reward.points} points</span>
+                            </p>
+                            <Link
+                                href={`/play/${dailyChallenge.gameId}`}
                                 style={{
-                                    padding: '1.5rem',
-                                    opacity: unlocked ? 1 : 0.5,
-                                    border: unlocked ? `2px solid ${color}` : '1px solid rgba(255, 255, 255, 0.1)',
-                                    position: 'relative',
-                                    overflow: 'hidden',
+                                    display: 'inline-block',
+                                    padding: '0.75rem 2rem',
+                                    background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+                                    color: '#fff',
+                                    borderRadius: '100px',
+                                    textDecoration: 'none',
+                                    fontWeight: 600,
+                                    boxShadow: '0 4px 20px rgba(99, 102, 241, 0.4)',
                                 }}
                             >
-                                {unlocked && (
+                                Play Now →
+                            </Link>
+                        </div>
+                    )}
+
+                    {/* Achievements Grid */}
+                    <h2 style={{
+                        fontSize: '1.75rem',
+                        marginBottom: '1.5rem',
+                        color: '#fff',
+                    }}>
+                        All Achievements
+                    </h2>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                        gap: '1.25rem',
+                    }}>
+                        {ACHIEVEMENTS.map(achievement => {
+                            const unlocked = progress.achievements.includes(achievement.id);
+                            const color = rarityColors[achievement.rarity];
+
+                            return (
+                                <div
+                                    key={achievement.id}
+                                    style={{
+                                        padding: '1.5rem',
+                                        opacity: unlocked ? 1 : 0.6,
+                                        background: unlocked
+                                            ? `linear-gradient(135deg, ${color}10, ${color}05)`
+                                            : 'rgba(255,255,255,0.02)',
+                                        border: unlocked
+                                            ? `2px solid ${color}50`
+                                            : '1px solid rgba(255, 255, 255, 0.08)',
+                                        borderRadius: '16px',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        transition: 'all 0.3s ease',
+                                    }}
+                                >
+                                    {unlocked && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '12px',
+                                            right: '12px',
+                                            width: '28px',
+                                            height: '28px',
+                                            borderRadius: '50%',
+                                            background: color,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '0.9rem',
+                                            fontWeight: 700,
+                                            color: '#fff',
+                                        }}>
+                                            ✓
+                                        </div>
+                                    )}
+
+                                    <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>
+                                        {unlocked ? achievement.icon : '🔒'}
+                                    </div>
+
                                     <div style={{
-                                        position: 'absolute',
-                                        top: '12px',
-                                        right: '12px',
-                                        width: '32px',
-                                        height: '32px',
-                                        borderRadius: '50%',
-                                        background: color,
+                                        display: 'inline-block',
+                                        padding: '0.2rem 0.6rem',
+                                        background: `${color}20`,
+                                        border: `1px solid ${color}50`,
+                                        borderRadius: '100px',
+                                        fontSize: '0.65rem',
+                                        fontWeight: 700,
+                                        color: color,
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '0.5px',
+                                        marginBottom: '0.75rem',
+                                    }}>
+                                        {achievement.rarity}
+                                    </div>
+
+                                    <h3 style={{
+                                        fontSize: '1.15rem',
+                                        marginBottom: '0.5rem',
+                                        color: '#fff',
+                                    }}>
+                                        {achievement.name}
+                                    </h3>
+                                    <p style={{
+                                        fontSize: '0.875rem',
+                                        color: 'rgba(255,255,255,0.6)',
+                                        marginBottom: '0.75rem',
+                                        lineHeight: 1.5,
+                                    }}>
+                                        {achievement.description}
+                                    </p>
+                                    <div style={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '1.25rem',
+                                        gap: '0.5rem',
+                                        fontSize: '0.9rem',
                                     }}>
-                                        ✓
+                                        <span style={{ color: '#f59e0b', fontWeight: 600 }}>
+                                            +{achievement.points} pts
+                                        </span>
                                     </div>
-                                )}
-
-                                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>
-                                    {unlocked ? achievement.icon : '🔒'}
                                 </div>
-
-                                <div style={{
-                                    display: 'inline-block',
-                                    padding: '0.25rem 0.75rem',
-                                    background: `${color}30`,
-                                    border: `1px solid ${color}`,
-                                    borderRadius: '100px',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 700,
-                                    color: color,
-                                    textTransform: 'uppercase',
-                                    marginBottom: '0.75rem',
-                                }}>
-                                    {achievement.rarity}
-                                </div>
-
-                                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
-                                    {achievement.name}
-                                </h3>
-                                <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', marginBottom: '0.75rem' }}>
-                                    {achievement.description}
-                                </p>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem' }}>
-                                    <span style={{ color: 'var(--accent)', fontWeight: 600 }}>
-                                        +{achievement.points} pts
-                                    </span>
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                 </div>
             </main>
 

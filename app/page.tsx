@@ -1,9 +1,10 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import GameCard from '@/components/GameCard';
-import AdBanner from '@/components/AdBanner';
+
 import { getFeaturedGames, getGamesByAgeGroup, getGameStats } from '@/lib/games';
 import { GAME_CATEGORIES, PLATFORM_CONFIG } from '@/lib/config';
+import { getFAQSchema, getGameListSchema, HOMEPAGE_FAQS, stringifySchema } from '@/lib/structuredData';
 import Link from 'next/link';
 
 export default function Home() {
@@ -17,6 +18,21 @@ export default function Home() {
       <Navigation />
 
       <main>
+        {/* Structured Data for Homepage - FAQ Schema for rich snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: stringifySchema(getFAQSchema(HOMEPAGE_FAQS))
+          }}
+        />
+        {/* ItemList Schema for Featured Games */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: stringifySchema(getGameListSchema(featuredGames, 'Featured Free Online Games'))
+          }}
+        />
+
         {/* Hero Section with Particles */}
         <section className="hero">
           <div className="hero-particles" />
@@ -56,9 +72,6 @@ export default function Home() {
         </section>
 
         <div className="container">
-          {/* Ad Banner */}
-          <AdBanner type="horizontal" slot="home-top" />
-
           {/* Featured Games with Premium Badge */}
           <section style={{ marginBottom: '4rem' }}>
             <div className="section-header">
@@ -95,8 +108,6 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Ad Banner */}
-          <AdBanner type="horizontal" slot="home-mid" />
 
           {/* Brain Training Section */}
           <section style={{ marginBottom: '4rem' }}>
@@ -112,6 +123,44 @@ export default function Home() {
               {brainGames.map(game => (
                 <GameCard key={game.id} game={game} />
               ))}
+            </div>
+          </section>
+
+          {/* NEW: Puzzle Solvers & Makers Highlight */}
+          <section style={{ marginBottom: '4rem' }}>
+            <div className="card" style={{
+              padding: '2.5rem',
+              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(168, 85, 247, 0.1))',
+              border: '1px solid rgba(245, 158, 11, 0.3)',
+              textAlign: 'center',
+            }}>
+              <h2 style={{
+                fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+                fontWeight: 700,
+                marginBottom: '1rem',
+                background: 'linear-gradient(135deg, #fbbf24, #a855f7)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}>
+                ✨ Stuck on a Puzzle? Use Our Free Solvers!
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', maxWidth: '600px', margin: '0 auto 1.5rem' }}>
+                Whether you&apos;re solving a Sudoku, unscrambling letters for Scrabble, or creating worksheets for your classroom — we&apos;ve got you covered.
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
+                <Link href="/tools/sudoku-solver" className="btn btn-primary" style={{ background: 'linear-gradient(135deg, #6366f1, #4f46e5)' }}>
+                  🧩 Sudoku Solver
+                </Link>
+                <Link href="/tools/word-unscrambler" className="btn btn-primary" style={{ background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)' }}>
+                  🔠 Word Unscrambler
+                </Link>
+                <Link href="/tools/word-search-maker" className="btn btn-accent">
+                  🖨️ Word Search Maker
+                </Link>
+                <Link href="/tools" className="btn btn-ghost">
+                  View All Solvers →
+                </Link>
+              </div>
             </div>
           </section>
 
@@ -164,6 +213,105 @@ export default function Home() {
                   <span className="category-arrow">→</span>
                 </Link>
               ))}
+            </div>
+          </section>
+
+          {/* Blog & Tips Section - SEO Content */}
+          <section style={{ marginBottom: '4rem' }}>
+            <div className="section-header">
+              <h2 className="section-title">📝 Learn & Improve</h2>
+              <Link href="/blog" className="btn btn-ghost">
+                Read All Articles →
+              </Link>
+            </div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '1.5rem',
+            }}>
+              {/* Article 1 */}
+              <Link href="/blog#logic-puzzles-boost-brain" style={{ textDecoration: 'none' }}>
+                <article className="card hover-lift" style={{
+                  padding: '1.75rem',
+                  height: '100%',
+                  background: 'linear-gradient(145deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.02))',
+                  border: '1px solid rgba(99, 102, 241, 0.15)',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '2rem' }}>🧠</span>
+                    <span style={{
+                      background: 'rgba(99, 102, 241, 0.2)',
+                      borderRadius: '100px',
+                      padding: '0.2rem 0.6rem',
+                      fontSize: '0.7rem',
+                      color: '#a5b4fc',
+                      fontWeight: 600,
+                    }}>Brain Training</span>
+                  </div>
+                  <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', lineHeight: 1.3 }}>
+                    5 Reasons Why Logic Puzzles Boost Your Brain Power
+                  </h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                    Discover the science-backed cognitive benefits of solving logic puzzles daily.
+                  </p>
+                </article>
+              </Link>
+
+              {/* Article 2 */}
+              <Link href="/blog#how-to-play-sudoku" style={{ textDecoration: 'none' }}>
+                <article className="card hover-lift" style={{
+                  padding: '1.75rem',
+                  height: '100%',
+                  background: 'linear-gradient(145deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.02))',
+                  border: '1px solid rgba(16, 185, 129, 0.15)',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '2rem' }}>🔢</span>
+                    <span style={{
+                      background: 'rgba(16, 185, 129, 0.2)',
+                      borderRadius: '100px',
+                      padding: '0.2rem 0.6rem',
+                      fontSize: '0.7rem',
+                      color: '#6ee7b7',
+                      fontWeight: 600,
+                    }}>Tutorial</span>
+                  </div>
+                  <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', lineHeight: 1.3 }}>
+                    How to Play Sudoku: A Beginner&apos;s Guide
+                  </h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                    Learn the fundamental rules and techniques to start solving with confidence.
+                  </p>
+                </article>
+              </Link>
+
+              {/* Article 3 */}
+              <Link href="/blog#tips-solve-hard-puzzles" style={{ textDecoration: 'none' }}>
+                <article className="card hover-lift" style={{
+                  padding: '1.75rem',
+                  height: '100%',
+                  background: 'linear-gradient(145deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.02))',
+                  border: '1px solid rgba(245, 158, 11, 0.15)',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '2rem' }}>⚡</span>
+                    <span style={{
+                      background: 'rgba(245, 158, 11, 0.2)',
+                      borderRadius: '100px',
+                      padding: '0.2rem 0.6rem',
+                      fontSize: '0.7rem',
+                      color: '#fbbf24',
+                      fontWeight: 600,
+                    }}>Game Tips</span>
+                  </div>
+                  <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', lineHeight: 1.3 }}>
+                    Tips to Solve Hard Puzzles Faster
+                  </h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                    Master scanning techniques and strategies expert solvers use.
+                  </p>
+                </article>
+              </Link>
             </div>
           </section>
 
@@ -223,8 +371,50 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          {/* FAQ Section - Matches structured data for rich snippets */}
+          <section style={{ marginBottom: '4rem' }}>
+            <div className="section-header">
+              <h2 className="section-title">❓ Frequently Asked Questions</h2>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {HOMEPAGE_FAQS.map((faq, index) => (
+                <details
+                  key={index}
+                  className="card"
+                  style={{
+                    padding: '1.5rem',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.02))',
+                    border: '1px solid rgba(99, 102, 241, 0.15)',
+                  }}
+                >
+                  <summary style={{
+                    fontWeight: 600,
+                    fontSize: '1.1rem',
+                    color: '#fff',
+                    listStyle: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}>
+                    {faq.question}
+                    <span style={{ marginLeft: '1rem', transition: 'transform 0.2s' }}>▼</span>
+                  </summary>
+                  <p style={{
+                    marginTop: '1rem',
+                    color: 'rgba(255,255,255,0.75)',
+                    lineHeight: 1.7,
+                    fontSize: '0.95rem',
+                  }}>
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
         </div>
-      </main>
+      </main >
 
       <Footer />
     </>
