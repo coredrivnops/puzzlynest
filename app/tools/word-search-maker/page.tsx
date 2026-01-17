@@ -8,6 +8,20 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Free Word Search Maker (Printable PDF) | PuzzlyNest",
     description: "Create custom printable word search puzzles for free. Perfect for teachers, parents, and parties. Enter your words and print instantly.",
+    alternates: {
+        canonical: 'https://puzzlynest.com/tools/word-search-maker',
+    },
+    openGraph: {
+        title: "Free Printable Word Search Maker",
+        description: "Create custom word search puzzles for classrooms, parties, and events - free online",
+        url: 'https://puzzlynest.com/tools/word-search-maker',
+        siteName: 'PuzzlyNest',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function WordSearchMakerPage() {

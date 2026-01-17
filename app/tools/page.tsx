@@ -8,6 +8,20 @@ import { getToolSchema, getBreadcrumbSchema, stringifySchema } from "@/lib/struc
 export const metadata: Metadata = {
     title: "Free Puzzle Tools & Solvers | PuzzlyNest",
     description: "Use our free utility tools to solve Sudoku, unscramble anagrams, match crossword patterns, and create printable puzzles.",
+    alternates: {
+        canonical: 'https://puzzlynest.com/tools',
+    },
+    openGraph: {
+        title: "Free Puzzle Solvers & Tools",
+        description: "Solve Sudoku, unscramble words, find crossword answers, and create puzzles - all free!",
+        url: 'https://puzzlynest.com/tools',
+        siteName: 'PuzzlyNest',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 const tools = [

@@ -8,6 +8,20 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Crossword Puzzle Solver & Helper | PuzzlyNest",
     description: "Stuck on a crossword clue? Enter the letters you know and let our pattern matcher find the missing words.",
+    alternates: {
+        canonical: 'https://puzzlynest.com/tools/crossword-solver',
+    },
+    openGraph: {
+        title: "Crossword Pattern Solver & Helper",
+        description: "Find crossword answers by entering the letters you know - free online solver",
+        url: 'https://puzzlynest.com/tools/crossword-solver',
+        siteName: 'PuzzlyNest',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function CrosswordPage() {

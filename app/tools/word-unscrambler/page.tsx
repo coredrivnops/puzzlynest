@@ -8,6 +8,20 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Word Unscrambler & Anagram Solver | PuzzlyNest",
     description: "Unscramble letters to find high-scoring words for Scrabble, Words With Friends, and Wordle. Supports wildcard inputs.",
+    alternates: {
+        canonical: 'https://puzzlynest.com/tools/word-unscrambler',
+    },
+    openGraph: {
+        title: "Word Unscrambler & Anagram Solver",
+        description: "Find high-scoring words from scrambled letters - free online tool",
+        url: 'https://puzzlynest.com/tools/word-unscrambler',
+        siteName: 'PuzzlyNest',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function UnscramblerPage() {

@@ -8,6 +8,20 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Smart Sudoku Solver & Logic Explainer | PuzzlyNest",
     description: "Stuck on a Sudoku? Use our free Smart Solver to find the next move with logical explanations. Not just an answer key—learn how to solve difficult puzzles!",
+    alternates: {
+        canonical: 'https://puzzlynest.com/tools/sudoku-solver',
+    },
+    openGraph: {
+        title: "Smart Sudoku Solver with Logic Hints",
+        description: "Get logical explanations for your next Sudoku move - free online solver",
+        url: 'https://puzzlynest.com/tools/sudoku-solver',
+        siteName: 'PuzzlyNest',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function SudokuSolverPage() {

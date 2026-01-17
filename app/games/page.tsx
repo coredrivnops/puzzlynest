@@ -8,6 +8,20 @@ import Link from 'next/link';
 export const metadata = {
     title: 'All Games - PuzzlyNest | Free Online Games',
     description: 'Browse our complete collection of 100+ free online games. Puzzle games, card games, brain training, and fun arcade games for all ages.',
+    alternates: {
+        canonical: 'https://puzzlynest.com/games',
+    },
+    openGraph: {
+        title: 'All Free Online Games - 100+ Games',
+        description: 'Browse our complete collection of free puzzle games, card games, brain training, and arcade games for all ages.',
+        url: 'https://puzzlynest.com/games',
+        siteName: 'PuzzlyNest',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function GamesPage() {

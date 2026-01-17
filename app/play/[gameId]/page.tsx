@@ -20,9 +20,25 @@ export async function generateMetadata({ params }: { params: Promise<{ gameId: s
     const game = getGameById(gameId);
     if (!game) return {};
 
+    const canonicalUrl = `https://puzzlynest.com/play/${gameId}`;
+
     return {
         title: `${game.name} - Play Free Online | PuzzlyNest`,
         description: `${game.description}. Play ${game.name} for free online, no download required. Perfect for ${game.ageGroup === 'kids' ? 'children' : 'all ages'}.`,
+        alternates: {
+            canonical: canonicalUrl,
+        },
+        openGraph: {
+            title: `${game.name} - Free Online Game`,
+            description: game.description,
+            url: canonicalUrl,
+            siteName: 'PuzzlyNest',
+            type: 'website',
+        },
+        robots: {
+            index: true,
+            follow: true,
+        },
     };
 }
 

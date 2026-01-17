@@ -18,9 +18,25 @@ export async function generateMetadata({ params }: { params: Promise<{ categoryI
     const category = GAME_CATEGORIES.find(c => c.id === categoryId);
     if (!category) return {};
 
+    const canonicalUrl = `https://puzzlynest.com/category/${categoryId}`;
+
     return {
         title: `${category.name} Games - Play Free Online | PuzzlyNest`,
         description: `${category.description}. Browse our collection of free ${category.name.toLowerCase()} games, perfect for ${category.ageGroup === 'kids' ? 'children' : category.ageGroup === 'seniors' ? 'seniors' : 'all ages'}.`,
+        alternates: {
+            canonical: canonicalUrl,
+        },
+        openGraph: {
+            title: `${category.name} Games - Free Online`,
+            description: category.description,
+            url: canonicalUrl,
+            siteName: 'PuzzlyNest',
+            type: 'website',
+        },
+        robots: {
+            index: true,
+            follow: true,
+        },
     };
 }
 
