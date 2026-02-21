@@ -62,6 +62,11 @@ export default function RootLayout({
         <meta name="theme-color" content="#0f0f23" />
         <meta name="theme-color" content="#0f0f23" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#0f0f23" media="(prefers-color-scheme: light)" />
+        {/* iOS PWA — native-like experience when added to Home Screen */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="PuzzlyNest" />
+
         {/* AdSense will be added here after approval with new coredrivn.ops Publisher ID */}
         {/* Structured Data for SEO - Enhanced schemas */}
         <script

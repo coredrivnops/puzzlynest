@@ -1,5 +1,38 @@
 import type { NextConfig } from "next";
 
+const securityHeaders = [
+  // Prevent MIME-type sniffing
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  // Prevent clickjacking
+  {
+    key: 'X-Frame-Options',
+    value: 'SAMEORIGIN',
+  },
+  // Enable XSS filter in legacy browsers
+  {
+    key: 'X-XSS-Protection',
+    value: '1; mode=block',
+  },
+  // Control referrer information
+  {
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
+  },
+  // Restrict browser feature access
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), payment=()',
+  },
+  // Force HTTPS (max 1 year, include subdomains)
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=31536000; includeSubDomains',
+  },
+];
+
 const nextConfig: NextConfig = {
   // Output standalone for Docker/Cloud Run deployment
   output: 'standalone',
@@ -11,6 +44,16 @@ const nextConfig: NextConfig = {
   images: {
     domains: [],
     unoptimized: false,
+  },
+
+  // Security headers applied to all routes
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ];
   },
 
   // Redirects for SEO - www to non-www
@@ -26,7 +69,7 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: 'https://puzzlynest.com/:path*',
-        permanent: true, // 301 redirect
+        permanent: true,
       },
       // Redirect puzzlynest.io to puzzlynest.com (301 permanent)
       {
@@ -38,7 +81,7 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: 'https://puzzlynest.com/:path*',
-        permanent: true, // 301 redirect
+        permanent: true,
       },
     ];
   },

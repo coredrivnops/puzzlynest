@@ -2,7 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import type { Game } from '@/lib/games';
+import { SkeletonGamePlayer } from '@/components/Skeleton';
+
 
 // --- AUTHENTIC GAME IMPLEMENTATIONS ---
 // Each game has unique mechanics true to its original gameplay
@@ -214,8 +217,13 @@ export default function GamePlayer({ game }: GamePlayerProps) {
     const GameComponent = gameComponents[game.id];
 
     if (GameComponent) {
-        return <GameComponent game={game} />;
+        return (
+            <Suspense fallback={<SkeletonGamePlayer />}>
+                <GameComponent game={game} />
+            </Suspense>
+        );
     }
+
 
     // Fallback: game ID not mapped — show description and browse prompt
     return (
