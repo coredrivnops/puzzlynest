@@ -96,7 +96,7 @@ Each phase handoff prompt below includes this step as the final task.
 |---|---------|--------|
 | F1 | **Related Games** component | ✅ Done (Phase 2) |
 | F2 | **Open Graph images** per game | Phase 3 |
-| F3 | **Blog expansion** — only 4 articles | Phase 5 |
+| F3 | **Blog expansion** — only 4 articles | ✅ Done (Phase 5) |
 | F4 | **PWA / Service Worker** | Phase 6 |
 | F5 | **Breadcrumb navigation** | ✅ Done (Phase 2) |
 | F6 | **Game completion analytics** | Phase 4 |
@@ -158,8 +158,14 @@ Each phase handoff prompt below includes this step as the final task.
 
 ---
 
-### Phase 5: Blog Expansion & Content Marketing
+### ✅ Phase 5: Blog Expansion & Content Marketing — COMPLETE
 - **Objective:** Add 4 new blog articles targeting high-volume keywords (reach 8+ total)
+- **Status:** ✅ Complete
+- **Deliverables:**
+  - Added `getStandaloneArticleSchema` to `lib/structuredData.ts`
+  - Created 4 standalone article pages with full JSON-LD schema and internal links
+  - Updated `app/blog/page.tsx` to display new and existing articles together
+  - Updated `app/sitemap.ts` with new article URLs
 - **Scope:** `app/blog/`, new article pages, `lib/structuredData.ts`, `app/sitemap.ts`
 - **Type:** New Feature / Content
 - **Tasks:**

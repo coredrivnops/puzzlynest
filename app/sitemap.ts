@@ -55,5 +55,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
     }));
 
-    return [...staticPages, ...toolPages, ...seoLandingPages, ...categoryPages, ...gamePages];
+    // Blog article pages - Individual SEO articles (Phase 5)
+    const blogArticlePages = [
+        { url: `${baseUrl}/blog/best-brain-training-games-2026`, lastModified: new Date('2026-02-21'), changeFrequency: 'weekly' as const, priority: 0.8 },
+        { url: `${baseUrl}/blog/how-puzzles-improve-memory`, lastModified: new Date('2026-02-21'), changeFrequency: 'weekly' as const, priority: 0.8 },
+        { url: `${baseUrl}/blog/free-educational-games-kids-2026`, lastModified: new Date('2026-02-21'), changeFrequency: 'weekly' as const, priority: 0.8 },
+        { url: `${baseUrl}/blog/solitaire-strategy-tips`, lastModified: new Date('2026-02-21'), changeFrequency: 'weekly' as const, priority: 0.8 },
+    ];
+
+    return [...staticPages, ...toolPages, ...seoLandingPages, ...blogArticlePages, ...categoryPages, ...gamePages];
+
 }

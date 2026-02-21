@@ -167,7 +167,7 @@ export function getGameListSchema(games: Game[], listName: string) {
 }
 
 /**
- * Article Schema - Used for blog posts
+ * Article Schema - Used for blog index (anchored articles)
  */
 export function getArticleSchema(article: {
     id: string;
@@ -204,6 +204,52 @@ export function getArticleSchema(article: {
         "inLanguage": "en-US"
     };
 }
+
+/**
+ * Standalone Article Schema - Used for individual /blog/[slug] pages
+ * Includes canonical URL, datePublished, dateModified, and author name.
+ */
+export function getStandaloneArticleSchema(article: {
+    title: string;
+    description: string;
+    url: string;
+    datePublished: string;
+    dateModified: string;
+    authorName?: string;
+    articleSection?: string;
+}) {
+    const canonicalUrl = article.url.startsWith('http') ? article.url : `${BASE_URL}${article.url}`;
+    return {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.description,
+        "url": canonicalUrl,
+        "datePublished": article.datePublished,
+        "dateModified": article.dateModified,
+        "author": {
+            "@type": "Organization",
+            "name": article.authorName ?? "PuzzlyNest",
+            "url": BASE_URL
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "PuzzlyNest",
+            "url": BASE_URL,
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${BASE_URL}/favicon.ico`
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": canonicalUrl
+        },
+        "articleSection": article.articleSection ?? "Brain Games",
+        "inLanguage": "en-US"
+    };
+}
+
 
 /**
  * SoftwareApplication Schema - Used for tools/solvers

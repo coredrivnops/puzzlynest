@@ -171,6 +171,47 @@ const ARTICLES = [
     },
 ];
 
+// New standalone article cards shown in the blog index listing
+export const STANDALONE_ARTICLES = [
+    {
+        href: '/blog/best-brain-training-games-2026',
+        title: '10 Best Free Brain Training Games to Play Online in 2026',
+        category: 'Brain Training',
+        emoji: '🧠',
+        readTime: '8 min read',
+        excerpt: 'From Sudoku to Logic Grid, we rank the top 10 scientifically-backed brain training games available free online right now.',
+        isNew: true,
+    },
+    {
+        href: '/blog/how-puzzles-improve-memory',
+        title: 'How Daily Puzzles Improve Memory: The Science Behind Brain Games',
+        category: 'Neuroscience',
+        emoji: '🔬',
+        readTime: '7 min read',
+        excerpt: 'What the research actually says about puzzles and memory — four types of memory that brain games train, and which games are most effective.',
+        isNew: true,
+    },
+    {
+        href: '/blog/free-educational-games-kids-2026',
+        title: "Free Educational Games for Kids: A Parent's Complete Guide 2026",
+        category: 'Kids & Education',
+        emoji: '👶',
+        readTime: '9 min read',
+        excerpt: 'Safe, free, no-download educational games for ages 4–12. Recommendations by age group with safety guidance for parents.',
+        isNew: true,
+    },
+    {
+        href: '/blog/solitaire-strategy-tips',
+        title: 'Solitaire Strategy: Expert Tips to Win More Games',
+        category: 'Classic Games',
+        emoji: '🃏',
+        readTime: '8 min read',
+        excerpt: 'Expert strategies for Klondike, Spider, FreeCell, and Pyramid Solitaire — dramatically improve your win rate with these proven techniques.',
+        isNew: true,
+    },
+];
+
+
 export default function BlogPage() {
     return (
         <>
@@ -256,11 +297,80 @@ export default function BlogPage() {
                         </p>
                     </header>
 
+                    {/* ===== NEW: Standalone Articles (linked pages) ===== */}
+                    <div style={{ marginBottom: '2.5rem' }}>
+                        <h2 style={{
+                            fontSize: '1.1rem',
+                            fontWeight: 700,
+                            color: 'rgba(255,255,255,0.5)',
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            marginBottom: '1.5rem',
+                        }}>
+                            ✨ New Articles
+                        </h2>
+                        <div style={{ display: 'grid', gap: '1.25rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+                            {STANDALONE_ARTICLES.map((article) => (
+                                <Link
+                                    key={article.href}
+                                    href={article.href}
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <article style={{
+                                        padding: '1.5rem',
+                                        background: 'rgba(255,255,255,0.04)',
+                                        borderRadius: '16px',
+                                        border: '1px solid rgba(99,102,241,0.2)',
+                                        height: '100%',
+                                        transition: 'all 0.2s',
+                                        cursor: 'pointer',
+                                    }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.85rem', flexWrap: 'wrap' }}>
+                                            <span style={{ fontSize: '1.75rem' }}>{article.emoji}</span>
+                                            <span style={{ background: 'rgba(99,102,241,0.2)', borderRadius: '100px', padding: '0.2rem 0.6rem', fontSize: '0.7rem', color: '#a5b4fc', fontWeight: 600 }}>
+                                                {article.category}
+                                            </span>
+                                            {article.isNew && (
+                                                <span style={{ background: 'linear-gradient(135deg, #f59e0b, #fbbf24)', color: '#000', borderRadius: '100px', padding: '0.2rem 0.55rem', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.05em' }}>
+                                                    NEW
+                                                </span>
+                                            )}
+                                            <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginLeft: 'auto' }}>{article.readTime}</span>
+                                        </div>
+                                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: '0.6rem', lineHeight: 1.35 }}>
+                                            {article.title}
+                                        </h3>
+                                        <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: '1rem' }}>
+                                            {article.excerpt}
+                                        </p>
+                                        <span style={{ fontSize: '0.85rem', color: '#818cf8', fontWeight: 600 }}>
+                                            Read Article →
+                                        </span>
+                                    </article>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginBottom: '2.5rem' }} />
+                    <h2 style={{
+                        fontSize: '1.1rem',
+                        fontWeight: 700,
+                        color: 'rgba(255,255,255,0.5)',
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        marginBottom: '1.5rem',
+                    }}>
+                        📚 All Articles
+                    </h2>
+
                     {/* Articles Grid */}
                     <div style={{
                         display: 'grid',
                         gap: '2rem',
                     }}>
+
                         {ARTICLES.map((article, index) => (
                             <article
                                 key={article.id}
