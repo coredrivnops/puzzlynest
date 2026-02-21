@@ -144,25 +144,17 @@ Each phase handoff prompt below includes this step as the final task.
 
 ---
 
-### Phase 4: Achievement System & Analytics Integration
-- **Objective:** Wire achievement system to Google Analytics events and improve UX
-- **Scope:** `lib/achievements.ts`, `lib/analytics.ts`, `components/AchievementPopup.tsx`, `components/GamePlayer.tsx`, `app/page.tsx`
-- **Type:** Enhancement
-- **Tasks:**
-  1. Create/verify GA4 tracking functions in `lib/analytics.ts`: `trackGameStart()`, `trackGameComplete()`, `trackAchievementUnlock()`
-  2. Call `trackAchievementUnlock()` when achievement unlocks in `achievements.ts`
-  3. Wrap game component render in a client-side tracker that calls `trackGameStart()` on mount
-  4. Review `AchievementPopup.tsx` — add `aria-live`, close button, ensure smooth animations
-  5. Add prominent "Daily Challenge" CTA card to homepage hero
-  6. Add "Achievements" link to navigation or footer
-  7. **Deploy:** `gcloud builds submit --config cloudbuild.yaml --project=gen-lang-client-0667918696`
-- **Estimated Token Load:** Medium
-- **Dependencies:** None
-- **Acceptance Criteria:**
-  - GA4 real-time dashboard shows game events when testing
-  - Achievement popup fires correctly with sound on unlock
-  - Daily challenge CTA visible on homepage
-- **Stakeholder Impact:** Data-driven insights; gamification improves retention
+### ✅ Phase 4: Achievements & Analytics Integration — COMPLETE
+- **Objective:** Wire achievement system to GA4, improve daily challenge discoverability
+- **Status:** ✅ Complete — commit `87c0c88`
+- **Deliverables:**
+  - `lib/analytics.ts` — added `trackGameStart()`, `trackGameComplete()`, `trackAchievementUnlock()` with SSR guards
+  - `components/GameTracker.tsx` — new client-only side-effect component firing `game_start` on every game mount
+  - `components/GamePlayer.tsx` — `<GameTracker>` wired alongside the Suspense boundary
+  - `lib/achievements.ts` — `trackAchievementUnlock()` called at the unlock point in `recordGamePlayed()`
+  - `components/AchievementPopup.tsx` — added `role="status"` `aria-live="polite"` `aria-atomic="true"` `aria-label` for screen reader announcements
+  - `components/Navigation.tsx` — `🏆 Achievements` added to **desktop** nav (was mobile-only)
+  - `app/page.tsx` — Daily Challenge card inserted at top of content, gold/amber gradient design, 🏆 icon, objective + points, direct CTAion
 
 ---
 
@@ -920,7 +912,7 @@ Report final state and tokens used. Update IMPLEMENTATION_PLAN.md Phase 10 statu
 | **1** | Critical Fixes & Branding | Bug Fix | 🔴 Critical | Medium | None | ✅ DONE (8280bc5) |
 | **2** | SEO & Discoverability | Enhancement | 🟠 High | Medium | None | ✅ DONE (b637987) |
 | **3** | Performance & Security | Enhancement | 🟠 High | Low | None | ✅ DONE (a01ebac) |
-| **4** | Achievements & Analytics | Enhancement | 🟡 Medium | Medium | None | ⏳ Pending |
+| **4** | Achievements & Analytics | Enhancement | 🟡 Medium | Medium | None | ✅ DONE (87c0c88) |
 | **5** | Blog Expansion | Content | 🟡 Medium | High | None | ⏳ Pending |
 | **6** | PWA & Offline Support | New Feature | 🟡 Medium | Medium | Phase 3 | ⏳ Pending |
 | **7** | CSS Architecture Refactor | Refactor | 🟢 Low | High | None | ⏳ Pending |
