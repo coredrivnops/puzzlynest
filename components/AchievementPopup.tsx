@@ -34,21 +34,27 @@ export default function AchievementPopup({ achievement, onClose }: AchievementPo
     const rarityColor = rarityColors[achievement.rarity];
 
     return (
-        <div style={{
-            position: 'fixed',
-            top: '100px',
-            right: isVisible ? '20px' : '-400px',
-            width: '350px',
-            background: 'rgba(30, 30, 60, 0.98)',
-            backdropFilter: 'blur(20px)',
-            border: `2px solid ${rarityColor}`,
-            borderRadius: '16px',
-            padding: '1.5rem',
-            boxShadow: `0 20px 60px ${rarityColor}60, 0 0 40px ${rarityColor}40`,
-            zIndex: 10000,
-            transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-            animation: isVisible ? 'achievement-bounce 0.6s ease' : 'none',
-        }}>
+        <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label={`Achievement unlocked: ${achievement.name}`}
+            style={{
+                position: 'fixed',
+                top: '100px',
+                right: isVisible ? '20px' : '-400px',
+                width: '350px',
+                background: 'rgba(30, 30, 60, 0.98)',
+                backdropFilter: 'blur(20px)',
+                border: `2px solid ${rarityColor}`,
+                borderRadius: '16px',
+                padding: '1.5rem',
+                boxShadow: `0 20px 60px ${rarityColor}60, 0 0 40px ${rarityColor}40`,
+                zIndex: 10000,
+                transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                animation: isVisible ? 'achievement-bounce 0.6s ease' : 'none',
+            }}>
+
             {/* Confetti Effect */}
             <div style={{
                 position: 'absolute',

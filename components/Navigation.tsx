@@ -27,11 +27,15 @@ export default function Navigation() {
                 <Link href="/tools" className="nav-link">
                     ✨ Solvers
                 </Link>
+                <Link href="/achievements" className="nav-link">
+                    🏆 Achievements
+                </Link>
                 <Link href="/blog" className="nav-link">
                     📝 Blog
                 </Link>
                 <SoundControl />
             </div>
+
 
             {/* Mobile Hamburger Button */}
             <button

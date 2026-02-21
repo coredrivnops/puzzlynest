@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import type { Game } from '@/lib/games';
 import { SkeletonGamePlayer } from '@/components/Skeleton';
+import GameTracker from '@/components/GameTracker';
 
 
 // --- AUTHENTIC GAME IMPLEMENTATIONS ---
@@ -218,9 +219,12 @@ export default function GamePlayer({ game }: GamePlayerProps) {
 
     if (GameComponent) {
         return (
-            <Suspense fallback={<SkeletonGamePlayer />}>
-                <GameComponent game={game} />
-            </Suspense>
+            <>
+                <GameTracker gameId={game.id} gameName={game.name} />
+                <Suspense fallback={<SkeletonGamePlayer />}>
+                    <GameComponent game={game} />
+                </Suspense>
+            </>
         );
     }
 

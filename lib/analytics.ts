@@ -58,3 +58,48 @@ export const CONSENT_CONFIG = {
     COOKIE_NAME: 'puzzlynest_consent',
     EXPIRES_DAYS: 365,
 };
+
+// -----------------------------------------------------------------
+// GA4 Event Tracking Helpers
+// All functions guard against SSR and missing gtag gracefully.
+// -----------------------------------------------------------------
+
+declare global {
+    interface Window {
+        gtag?: (...args: unknown[]) => void;
+    }
+}
+
+function safeGtag(event: string, params: Record<string, unknown>) {
+    if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+    window.gtag('event', event, params);
+}
+
+/** Fire when a game component mounts and the user begins playing. */
+export function trackGameStart(gameId: string, gameName: string): void {
+    safeGtag('game_start', {
+        game_id: gameId,
+        game_name: gameName,
+    });
+}
+
+/** Fire when a game session ends — win, loss, or the user navigates away. */
+export function trackGameComplete(
+    gameId: string,
+    result: 'win' | 'loss',
+    durationSeconds?: number
+): void {
+    safeGtag('game_complete', {
+        game_id: gameId,
+        result,
+        ...(durationSeconds !== undefined && { duration_seconds: durationSeconds }),
+    });
+}
+
+/** Fire when an achievement is newly unlocked. */
+export function trackAchievementUnlock(achievementId: string, achievementName: string): void {
+    safeGtag('achievement_unlock', {
+        achievement_id: achievementId,
+        achievement_name: achievementName,
+    });
+}

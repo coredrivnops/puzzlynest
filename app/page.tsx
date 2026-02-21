@@ -2,16 +2,21 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import GameCard from '@/components/GameCard';
 
-import { getFeaturedGames, getGamesByAgeGroup, getGameStats } from '@/lib/games';
+import { getFeaturedGames, getGamesByAgeGroup, getGameStats, getGameById } from '@/lib/games';
 import { GAME_CATEGORIES, PLATFORM_CONFIG } from '@/lib/config';
 import { getFAQSchema, getGameListSchema, HOMEPAGE_FAQS, stringifySchema } from '@/lib/structuredData';
+import { achievementManager } from '@/lib/achievements';
 import Link from 'next/link';
 
 export default function Home() {
   const stats = getGameStats();
   const featuredGames = getFeaturedGames();
   const kidsGames = getGamesByAgeGroup('kids').slice(0, 6);
-  const brainGames = getGamesByAgeGroup('seniors').slice(0, 6); // Brain training games
+  const brainGames = getGamesByAgeGroup('seniors').slice(0, 6);
+
+  // Daily challenge — date-derived, no localStorage (safe for SSR)
+  const dailyChallenge = achievementManager.getDailyChallenge();
+  const dailyGame = dailyChallenge ? getGameById(dailyChallenge.gameId) : null;
 
   return (
     <>
@@ -72,6 +77,99 @@ export default function Home() {
         </section>
 
         <div className="container">
+          {/* ===== DAILY CHALLENGE CARD ===== */}
+          {dailyGame && dailyChallenge && (
+            <section style={{ marginBottom: '3rem' }}>
+              <div style={{
+                position: 'relative',
+                background: 'linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(251,191,36,0.06) 50%, rgba(217,119,6,0.1) 100%)',
+                border: '2px solid',
+                borderImage: 'linear-gradient(135deg, #f59e0b, #fbbf24, #d97706) 1',
+                borderRadius: '20px',
+                padding: '2rem 2.5rem',
+                overflow: 'hidden',
+                boxShadow: '0 0 40px rgba(245,158,11,0.15), inset 0 1px 0 rgba(255,255,255,0.05)',
+              }}>
+                {/* Animated glow orb */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-60px',
+                  right: '-60px',
+                  width: '200px',
+                  height: '200px',
+                  background: 'radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 70%)',
+                  pointerEvents: 'none',
+                }} />
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                  {/* Trophy Icon */}
+                  <div style={{
+                    fontSize: '3.5rem',
+                    flexShrink: 0,
+                    animation: 'pulse-scale 3s ease-in-out infinite',
+                    filter: 'drop-shadow(0 4px 12px rgba(251,191,36,0.6))',
+                  }}>🏆</div>
+
+                  {/* Challenge Info */}
+                  <div style={{ flex: 1, minWidth: '200px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem' }}>
+                      <span style={{
+                        background: 'linear-gradient(135deg, #f59e0b, #fbbf24)',
+                        color: '#000',
+                        fontSize: '0.65rem',
+                        fontWeight: 800,
+                        letterSpacing: '0.08em',
+                        padding: '0.2rem 0.65rem',
+                        borderRadius: '100px',
+                        textTransform: 'uppercase',
+                      }}>Today&apos;s Challenge</span>
+                      <span style={{ fontSize: '0.75rem', color: 'rgba(251,191,36,0.7)' }}>
+                        {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
+                      </span>
+                    </div>
+                    <h2 style={{
+                      fontSize: 'clamp(1.1rem, 3vw, 1.5rem)',
+                      fontWeight: 800,
+                      color: '#fff',
+                      marginBottom: '0.35rem',
+                      lineHeight: 1.2,
+                    }}>
+                      {dailyGame.name}
+                    </h2>
+                    <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.65)', margin: 0 }}>
+                      🎯 {dailyChallenge.objective} &nbsp;·&nbsp; +{dailyChallenge.reward.points} pts
+                    </p>
+                  </div>
+
+                  {/* CTA Button */}
+                  <Link
+                    href={`/play/${dailyGame.id}`}
+                    id="daily-challenge-cta"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.85rem 1.75rem',
+                      background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #d97706 100%)',
+                      color: '#000',
+                      fontWeight: 800,
+                      fontSize: '0.95rem',
+                      borderRadius: '12px',
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
+                      boxShadow: '0 4px 20px rgba(245,158,11,0.4)',
+                      transition: 'all 0.2s',
+                    }}
+                    aria-label={`Play today's daily challenge: ${dailyGame.name}`}
+                  >
+                    Play Today&apos;s Challenge →
+                  </Link>
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Featured Games with Premium Badge */}
           <section style={{ marginBottom: '4rem' }}>
             <div className="section-header">

@@ -1,4 +1,5 @@
 // Achievement System - Track user progress and unlockables
+import { trackAchievementUnlock } from '@/lib/analytics';
 
 export interface Achievement {
     id: string;
@@ -322,6 +323,8 @@ class AchievementManager {
             if (unlocked) {
                 progress.achievements.push(achievement.id);
                 newAchievements.push(achievement.id);
+                // Fire GA4 event immediately on unlock
+                trackAchievementUnlock(achievement.id, achievement.name);
             }
         });
 
