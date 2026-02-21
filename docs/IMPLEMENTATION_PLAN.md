@@ -163,23 +163,18 @@ Each phase handoff prompt below includes this step as the final task.
 - **Status:** ✅ Complete
 - **Deliverables:**
   - Added `getStandaloneArticleSchema` to `lib/structuredData.ts`
-  - Created 4 standalone article pages with full JSON-LD schema and internal links
-  - Updated `app/blog/page.tsx` to display new and existing articles together
-  - Updated `app/sitemap.ts` with new article URLs
-- **Scope:** `app/blog/`, new article pages, `lib/structuredData.ts`, `app/sitemap.ts`
-- **Type:** New Feature / Content
-- **Tasks:**
-  1. Study existing blog article structure before writing new ones
-  2. Create `getArticleSchema()` in `lib/structuredData.ts` if it doesn't exist
-  3. Write article: **"10 Best Free Brain Training Games to Play Online in 2026"** (~1200 words)
-  4. Write article: **"How Daily Puzzles Improve Memory: The Science Behind Brain Games"** (~1200 words)
-  5. Write article: **"Free Educational Games for Kids: A Parent's Complete Guide 2026"** (~1200 words)
-  6. Write article: **"Solitaire Strategy: Expert Tips to Win More Games"** (~1000 words)
-  7. Update `app/blog/page.tsx` index to list all 8+ articles
-  8. Update `app/sitemap.ts` to include all 4 new article URLs
-  9. **Deploy:** `gcloud builds submit --config cloudbuild.yaml --project=gen-lang-client-0667918696`
-- **Estimated Token Load:** High (split into 5a: articles 1-2 + schema, 5b: articles 3-4 + blog index + sitemap)
-- **Dependencies:** None
+### ✅ Phase 5: Blog Expansion (SEO) — COMPLETE
+- **Objective:** Establish domain authority via long-form text content.
+- **Status:** ✅ Complete — commit `e4ac433`
+- **Deliverables:**
+  - `lib/structuredData.ts` — Added `getStandaloneArticleSchema()` to support individual `/blog/[slug]` pages with precise URLs, modification dates, and author tags.
+  - **4 New Articles (~1000 words each):**
+    1. `app/blog/best-brain-training-games-2026/page.tsx`
+    2. `app/blog/how-puzzles-improve-memory/page.tsx`
+    3. `app/blog/free-educational-games-kids-2026/page.tsx`
+    4. `app/blog/solitaire-strategy-tips/page.tsx`
+  - `app/blog/page.tsx` — Updated Blog root to cleanly separate new standalone article cards (with "NEW" badges) from legacy anchored articles.
+  - `app/sitemap.ts` — Inserted the 4 new URLs with `lastModified: 2026-02-21`, `changeFrequency: 'weekly'`, and high `priority: 0.8`.
 - **Acceptance Criteria:**
   - `/blog` shows 8+ articles
   - Each article has valid `Article` JSON-LD (test at validator.schema.org)
@@ -919,7 +914,7 @@ Report final state and tokens used. Update IMPLEMENTATION_PLAN.md Phase 10 statu
 | **2** | SEO & Discoverability | Enhancement | 🟠 High | Medium | None | ✅ DONE (b637987) |
 | **3** | Performance & Security | Enhancement | 🟠 High | Low | None | ✅ DONE (a01ebac) |
 | **4** | Achievements & Analytics | Enhancement | 🟡 Medium | Medium | None | ✅ DONE (87c0c88) |
-| **5** | Blog Expansion | Content | 🟡 Medium | High | None | ⏳ Pending |
+| **5** | Blog Expansion | Content | 🟡 Medium | High | None | ✅ DONE (e4ac433) |
 | **6** | PWA & Offline Support | New Feature | 🟡 Medium | Medium | Phase 3 | ⏳ Pending |
 | **7** | CSS Architecture Refactor | Refactor | 🟢 Low | High | None | ⏳ Pending |
 | **8a** | Game Quality — Kids (7 games) | New Feature | 🟢 Low | High | Phase 1 | ⏳ Pending |
