@@ -23,7 +23,7 @@ PuzzlyNest is a free online gaming platform designed for **kids (4-12 years)** a
 - 🧩 Age-appropriate puzzles
 
 ### Platform Features
-- ✅ 100+ unique games with authentic mechanics
+- ✅ 100+ unique games — 72+ custom implementations
 - 🎵 Sound effects and music controls
 - 🏆 Achievement system with unlockables
 - 📱 Responsive design for all devices
@@ -85,7 +85,7 @@ gcloud config set project YOUR_PROJECT_ID
 # Build and deploy
 gcloud run deploy puzzlynest \
   --source . \
-  --region europe-west1 \
+  --region us-central1 \
   --allow-unauthenticated
 ```
 
@@ -99,7 +99,7 @@ puzzlynest/
 │   ├── games/            # Game listing pages
 │   └── play/[id]/        # Individual game player
 ├── components/           
-│   ├── games/            # 27+ authentic game implementations
+│   ├── games/            # 72+ custom game components
 │   ├── engines/          # Generic game engines
 │   ├── GamePlayer.tsx    # Universal game loader
 │   ├── Navigation.tsx    # Site navigation
@@ -126,7 +126,7 @@ puzzlynest/
 
 ## 📝 License
 
-© 2024-2025 PuzzlyNest. All rights reserved.
+© 2024-2026 PuzzlyNest. All rights reserved.
 
 ## 🤝 Contributing
 

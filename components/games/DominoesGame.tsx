@@ -198,9 +198,10 @@ export default function DominoesGame() {
                 {/* Board Area */}
                 <div className="flex-1 bg-green-800/30 m-4 rounded-xl flex items-center justify-center relative overflow-hidden">
                     <div className="flex items-center gap-1 flex-wrap justify-center p-8">
-                        {/* Visual Chain representation */}
-                        <div className="bg-slate-900 text-white p-2 rounded">Example Match: [{board.leftVal}|...|{board.rightVal}]</div>
-                        <div className="text-xs text-center w-full">Visual placement coming soon... logic works!</div>
+                        {/* Visual chain — open ends shown for valid plays */}
+                        <div className="bg-slate-900 text-white p-2 rounded text-sm">
+                            Open ends: [{board.leftVal}] • [{board.rightVal}] — {board.tiles.length} tile{board.tiles.length !== 1 ? 's' : ''} played
+                        </div>
                         {board.tiles.map(t => (
                             <div key={t.id} className="w-8 h-16 bg-white border border-black rounded text-black flex flex-col items-center justify-center text-xs font-bold">
                                 <div>{t.left}</div>

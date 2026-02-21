@@ -8,8 +8,8 @@ class SoundManager {
     constructor() {
         // Load volume from localStorage
         if (typeof window !== 'undefined') {
-            const savedVolume = localStorage.getItem('playzen_volume');
-            const savedMuted = localStorage.getItem('playzen_muted');
+            const savedVolume = localStorage.getItem('puzzlynest_volume');
+            const savedMuted = localStorage.getItem('puzzlynest_muted');
 
             if (savedVolume) this.volume = parseFloat(savedVolume);
             if (savedMuted) this.muted = savedMuted === 'true';
@@ -83,7 +83,7 @@ class SoundManager {
     setVolume(value: number) {
         this.volume = Math.max(0, Math.min(1, value));
         if (typeof window !== 'undefined') {
-            localStorage.setItem('playzen_volume', this.volume.toString());
+            localStorage.setItem('puzzlynest_volume', this.volume.toString());
         }
     }
 
@@ -94,7 +94,7 @@ class SoundManager {
     toggleMute() {
         this.muted = !this.muted;
         if (typeof window !== 'undefined') {
-            localStorage.setItem('playzen_muted', this.muted.toString());
+            localStorage.setItem('puzzlynest_muted', this.muted.toString());
         }
         return this.muted;
     }

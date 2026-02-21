@@ -225,11 +225,19 @@ export const ACHIEVEMENTS: Achievement[] = [
 
 // Achievement Manager Class
 class AchievementManager {
-    private storageKey = 'playzen_progress';
+    private storageKey = 'puzzlynest_progress';
+    private legacyKey = 'playzen_progress';
 
     getProgress(): UserProgress {
         if (typeof window === 'undefined') {
             return this.getDefaultProgress();
+        }
+
+        // Migrate legacy key if it exists
+        const legacy = localStorage.getItem(this.legacyKey);
+        if (legacy) {
+            localStorage.setItem(this.storageKey, legacy);
+            localStorage.removeItem(this.legacyKey);
         }
 
         const stored = localStorage.getItem(this.storageKey);

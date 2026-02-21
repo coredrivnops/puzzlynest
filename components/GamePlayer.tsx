@@ -217,7 +217,7 @@ export default function GamePlayer({ game }: GamePlayerProps) {
         return <GameComponent game={game} />;
     }
 
-    // For games not yet implemented, show a "Coming Soon" with game info
+    // Fallback: game ID not mapped — show description and browse prompt
     return (
         <div className="game-container">
             <div className="game-canvas-wrapper">
@@ -230,22 +230,21 @@ export default function GamePlayer({ game }: GamePlayerProps) {
                 <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
                     <div style={{ fontSize: '5rem', marginBottom: '1.5rem' }}>🎮</div>
                     <h2 style={{ marginBottom: '1rem' }}>{game.name}</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2rem', maxWidth: '400px', margin: '0 auto 2rem' }}>
+                    <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2rem', maxWidth: '420px', margin: '0 auto 2rem' }}>
                         {game.description}
                     </p>
-                    <div style={{
-                        padding: '1rem 2rem',
-                        background: 'rgba(99, 102, 241, 0.2)',
+                    <Link href="/games" style={{
+                        padding: '0.85rem 2rem',
+                        background: 'linear-gradient(135deg,#6366f1,#4f46e5)',
                         borderRadius: '12px',
-                        color: '#a5b4fc',
+                        color: 'white',
+                        textDecoration: 'none',
+                        fontWeight: 700,
                         display: 'inline-block',
                         marginBottom: '1rem',
                     }}>
-                        🚧 This game is being built with authentic gameplay mechanics
-                    </div>
-                    <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem' }}>
-                        Try one of our {Object.keys(gameComponents).length}+ playable games!
-                    </p>
+                        Browse {Object.keys(gameComponents).length}+ Games
+                    </Link>
                 </div>
             </div>
         </div>
