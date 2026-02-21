@@ -4,10 +4,11 @@ import Footer from '@/components/Footer';
 
 import GamePlayer from '@/components/GamePlayer';
 import SocialShare from '@/components/SocialShare';
-import { getGameById, GAMES } from '@/lib/games';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import RelatedGames from '@/components/RelatedGames';
+import { getGameById, getGamesByCategory, GAMES } from '@/lib/games';
 import { getSEOContent } from '@/lib/seoContent';
 import { getGameSchema, getBreadcrumbSchema, stringifySchema } from '@/lib/structuredData';
-import Link from 'next/link';
 
 export function generateStaticParams() {
     return GAMES.map((game) => ({
@@ -51,38 +52,58 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
         notFound();
     }
 
+    // Format category label for breadcrumb: 'brain-training' → 'Brain Training'
+    const categoryLabel = game.category
+        .split('-')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+
+    // Related games: up to 6 from same category, excluding the current game
+    const relatedGames = getGamesByCategory(game.category, game.id, 6);
+
     return (
         <>
             <Navigation />
 
             <main>
+                {/* Breadcrumb JSON-LD schema */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: stringifySchema(getBreadcrumbSchema([
+                            { name: 'Home', url: 'https://puzzlynest.com/' },
+                            { name: 'Games', url: 'https://puzzlynest.com/games' },
+                            { name: categoryLabel, url: `https://puzzlynest.com/category/${game.category}` },
+                            { name: game.name, url: `https://puzzlynest.com/play/${game.id}` },
+                        ])),
+                    }}
+                />
+                {/* VideoGame schema */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: stringifySchema(getGameSchema(game)),
+                    }}
+                />
+
+                {/* Visual breadcrumb nav */}
+                <div className="container" style={{ paddingTop: '0.5rem' }}>
+                    <Breadcrumbs
+                        items={[
+                            { label: 'Home', href: '/' },
+                            { label: 'Games', href: '/games' },
+                            { label: categoryLabel, href: `/category/${game.category}` },
+                            { label: game.name },
+                        ]}
+                    />
+                </div>
 
                 <GamePlayer game={game} />
 
-
                 {/* SEO Content & Related Games */}
                 <div className="container" style={{ marginTop: '2rem' }}>
-                    {/* Enhanced Structured Data - VideoGame Schema */}
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{
-                            __html: stringifySchema(getGameSchema(game)),
-                        }}
-                    />
-                    {/* Breadcrumb Schema for navigation context */}
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{
-                            __html: stringifySchema(getBreadcrumbSchema([
-                                { name: 'Home', url: '/' },
-                                { name: 'Games', url: '/games' },
-                                { name: game.category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), url: `/category/${game.category}` },
-                                { name: game.name, url: `/play/${game.id}` }
-                            ])),
-                        }}
-                    />
 
-                    {/* SEO Block */}
+                    {/* About this game */}
                     <section style={{
                         padding: '2rem',
                         background: 'rgba(255,255,255,0.05)',
@@ -91,7 +112,7 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                     }}>
                         <h2 style={{ marginBottom: '1rem' }}>About {game.name}</h2>
                         <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1rem' }}>
-                            {game.description}. This free online game is part of our {game.category.replace('-', ' ')} collection
+                            {game.description}. This free online game is part of our {game.category.replace(/-/g, ' ')} collection
                             and is designed for {game.ageGroup === 'kids' ? 'children ages 4-12' : 'players of all ages'}.
                         </p>
                         <ul style={{ color: 'rgba(255,255,255,0.7)', marginLeft: '1.5rem' }}>
@@ -110,10 +131,10 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                         </div>
                     </section>
 
-                    {/* Extended SEO Guide - "Learn to Play" Section */}
+                    {/* Extended SEO Guide — "Learn to Play" */}
                     {seoContent && (
                         <section style={{ marginBottom: '2rem' }}>
-                            {/* How to Play Card */}
+                            {/* How to Play */}
                             <div className="card" style={{
                                 padding: '2rem',
                                 marginBottom: '1.5rem',
@@ -126,7 +147,7 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                                 />
                             </div>
 
-                            {/* Two-column layout for strategies and benefits */}
+                            {/* Strategies + Benefits */}
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
                                 <div className="card" style={{
                                     padding: '1.5rem',
@@ -152,31 +173,11 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
                         </section>
                     )}
 
-                    {/* Related Games */}
-                    <section>
-                        <h2 className="section-title" style={{ marginBottom: '1rem' }}>
-                            More {game.category.replace('-', ' ')} Games
-                        </h2>
-                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                            {GAMES
-                                .filter(g => g.category === game.category && g.id !== game.id)
-                                .slice(0, 4)
-                                .map(relatedGame => (
-                                    <Link
-                                        key={relatedGame.id}
-                                        href={`/play/${relatedGame.id}`}
-                                        className="card"
-                                        style={{
-                                            padding: '1rem 1.5rem',
-                                            textDecoration: 'none',
-                                            color: 'white',
-                                        }}
-                                    >
-                                        {relatedGame.name}
-                                    </Link>
-                                ))}
-                        </div>
-                    </section>
+                    {/* Related Games — rich component */}
+                    <RelatedGames
+                        games={relatedGames}
+                        currentCategory={game.category}
+                    />
                 </div>
             </main>
 
@@ -184,3 +185,4 @@ export default async function GamePage({ params }: { params: Promise<{ gameId: s
         </>
     );
 }
+

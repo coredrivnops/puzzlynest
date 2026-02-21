@@ -1158,8 +1158,9 @@ export const GAMES: Game[] = [
 ];
 
 // Helper functions
-export function getGamesByCategory(categoryId: string): Game[] {
-    return GAMES.filter(game => game.category === categoryId);
+export function getGamesByCategory(categoryId: string, excludeId?: string, limit?: number): Game[] {
+    const filtered = GAMES.filter(game => game.category === categoryId && game.id !== excludeId);
+    return limit ? filtered.slice(0, limit) : filtered;
 }
 
 export function getGamesByAgeGroup(ageGroup: AgeGroup): Game[] {
